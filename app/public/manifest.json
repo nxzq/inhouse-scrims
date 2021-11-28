@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "lol-inhouse",
+  "name": "Matchmaking for League of Legend inhouse scrims. Algorithm accounts for elo and role preference.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,13 +8,13 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "league-of-legends-icon.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "league-of-legends-icon.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     }
   ],
