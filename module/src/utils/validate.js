@@ -11,7 +11,7 @@ module.exports = yup.array()
 .of(
   yup.object({
     name: yup.string().required(),
-    elo: yup.string().required().matches(/(iron|bronze|silver|gold|platinum|diamond|master|grandmaster|challenger)/),
-    roles: yup.array().required().min(0).max(2).of(yup.string().matches(/(top|jug|mid|bot|sup)/))
+    elo: yup.string().lowercase().required().matches(/(iron(\d{0}[1-4])?|bronze(\d{0}[1-4])?|silver(\d{0}[1-4])?|gold(\d{0}[1-4])?|platinum(\d{0}[1-4])?|diamond(\d{0}[1-4])?|master|grandmaster|challenger)/),
+    roles: yup.array().required().min(0).max(2).of(yup.string().lowercase().matches(/(top|jug|mid|bot|sup)/))
   }),
 )

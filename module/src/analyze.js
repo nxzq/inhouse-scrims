@@ -37,7 +37,7 @@ module.exports = function(games) {
   options = filterAvgLaneDiff(options, avgLaneDiffThreshold)
   const roleScoreThreshold = quantile(options.map(x => x.roleScore),.75)
   options = filterRoleScore(options, roleScoreThreshold)
-  const deltaValuesThreshold = quantile(options.map(x => x.delta),.25)
+  const deltaValuesThreshold = quantile(options.map(x => x.delta),.10)
   options = filterDelta(options, deltaValuesThreshold)
   const skillLevelThreshold = quantile(options.map(x => x.skillLevel),.75)
   options = filterSkillLevel(options, skillLevelThreshold)

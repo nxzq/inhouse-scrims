@@ -65,6 +65,21 @@ const getDraftMetadata = (draft, players) => {
   }
 }
 
+const prettyRank = (elo) => {
+  const ranks = {
+    1: 'i',
+    2: 'ii',
+    3: 'iii',
+    4: 'iv'
+  }
+  const division = elo.match(/\d+$/)
+  if (division) {
+    return `${elo.charAt(0).toUpperCase() + elo.slice(1,-1)} ${ranks[division[0]].toUpperCase()}`
+  } else {
+    return elo.charAt(0).toUpperCase() + elo.slice(1)
+  }
+}
+
 const prettyOutput = (game, players) =>{
   const roster = game.draft.map(x => players[x])
   const rolesBreakdown = getRoleStatusArray(roster)
@@ -72,21 +87,21 @@ const prettyOutput = (game, players) =>{
   const { team1Mmr, team2Mmr, draft, ...metadata } = game
   const team1 = {
     roster: {
-      top: { ...roster[0], autofill: rolesBreakdown[0] === 'autofill' ? true : false, mmr: mmrBreakdown[0] },
-      jug: { ...roster[1], autofill: rolesBreakdown[1] === 'autofill' ? true : false, mmr: mmrBreakdown[1] },
-      mid: { ...roster[2], autofill: rolesBreakdown[2] === 'autofill' ? true : false, mmr: mmrBreakdown[2] },
-      bot: { ...roster[3], autofill: rolesBreakdown[3] === 'autofill' ? true : false, mmr: mmrBreakdown[3] },
-      sup: { ...roster[4], autofill: rolesBreakdown[4] === 'autofill' ? true : false, mmr: mmrBreakdown[4] },
+      top: { ...roster[0], autofill: rolesBreakdown[0] === 'autofill' ? true : false, mmr: mmrBreakdown[0], elo: prettyRank(roster[0].elo) },
+      jug: { ...roster[1], autofill: rolesBreakdown[1] === 'autofill' ? true : false, mmr: mmrBreakdown[1], elo: prettyRank(roster[1].elo) },
+      mid: { ...roster[2], autofill: rolesBreakdown[2] === 'autofill' ? true : false, mmr: mmrBreakdown[2], elo: prettyRank(roster[2].elo) },
+      bot: { ...roster[3], autofill: rolesBreakdown[3] === 'autofill' ? true : false, mmr: mmrBreakdown[3], elo: prettyRank(roster[3].elo) },
+      sup: { ...roster[4], autofill: rolesBreakdown[4] === 'autofill' ? true : false, mmr: mmrBreakdown[4], elo: prettyRank(roster[4].elo) },
     },
     mmr: team1Mmr
   }
   const team2 = {
     roster: {
-      top: { ...roster[5], autofill: rolesBreakdown[5] === 'autofill' ? true : false, mmr: mmrBreakdown[5] },
-      jug: { ...roster[6], autofill: rolesBreakdown[6] === 'autofill' ? true : false, mmr: mmrBreakdown[6] },
-      mid: { ...roster[7], autofill: rolesBreakdown[7] === 'autofill' ? true : false, mmr: mmrBreakdown[7] },
-      bot: { ...roster[8], autofill: rolesBreakdown[8] === 'autofill' ? true : false, mmr: mmrBreakdown[8] },
-      sup: { ...roster[9], autofill: rolesBreakdown[9] === 'autofill' ? true : false, mmr: mmrBreakdown[9] },
+      top: { ...roster[5], autofill: rolesBreakdown[5] === 'autofill' ? true : false, mmr: mmrBreakdown[5], elo: prettyRank(roster[5].elo)  },
+      jug: { ...roster[6], autofill: rolesBreakdown[6] === 'autofill' ? true : false, mmr: mmrBreakdown[6], elo: prettyRank(roster[6].elo)  },
+      mid: { ...roster[7], autofill: rolesBreakdown[7] === 'autofill' ? true : false, mmr: mmrBreakdown[7], elo: prettyRank(roster[7].elo)  },
+      bot: { ...roster[8], autofill: rolesBreakdown[8] === 'autofill' ? true : false, mmr: mmrBreakdown[8], elo: prettyRank(roster[8].elo)  },
+      sup: { ...roster[9], autofill: rolesBreakdown[9] === 'autofill' ? true : false, mmr: mmrBreakdown[9], elo: prettyRank(roster[9].elo)  },
     },
     mmr: team2Mmr
   }
@@ -102,7 +117,7 @@ const prettyOutput = (game, players) =>{
 /**
  * matchmaking function
  * @param {Array.<Object>} data 
- * @returns {<Object>}
+ * @returns {Array.<Object>}
  */
 module.exports = function(data) {
   const players = data.map(x => { return {...x, mmr: MMR[x.elo] }})
@@ -110,7 +125,5 @@ module.exports = function(data) {
   const autofill = roleDiversity.length <= 1 ? true : false
   const drafts = draft(players, autofill)
   const games = drafts.map(x => getDraftMetadata(x, players))
-  const options = analyze(games)
-  let game = options[Math.floor(Math.random() * options.length)]
-  return prettyOutput(game, players)
+  return analyze(games).map(game => prettyOutput(game, players))
 }

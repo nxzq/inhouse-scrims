@@ -3,11 +3,10 @@ const matchmaking = require('./matchmaking')
 
 /**
  * inhouse generator coordinator
- * @param {Array.<Object>} input 
- * @param {boolean} [random] 
- * @returns {<Object>} 
+ * @param {Array.<Object>} input
+ * @returns {Array.<Object>} 
  */
-module.exports = function(input, random=false) {
+module.exports = function(input) {
   inputSchema.validateSync(input)
-  return matchmaking(input, random)
+  return matchmaking(input).slice(0,100)
 }
