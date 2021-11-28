@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/lol-inhouse/static/css/main.3b7514ab.chunk.css",
+    "main.js": "/lol-inhouse/static/js/main.41cff52f.chunk.js",
+    "main.js.map": "/lol-inhouse/static/js/main.41cff52f.chunk.js.map",
+    "runtime-main.js": "/lol-inhouse/static/js/runtime-main.03090154.js",
+    "runtime-main.js.map": "/lol-inhouse/static/js/runtime-main.03090154.js.map",
+    "static/js/2.5f462f2b.chunk.js": "/lol-inhouse/static/js/2.5f462f2b.chunk.js",
+    "static/js/2.5f462f2b.chunk.js.map": "/lol-inhouse/static/js/2.5f462f2b.chunk.js.map",
+    "static/js/3.ef91793a.chunk.js": "/lol-inhouse/static/js/3.ef91793a.chunk.js",
+    "static/js/3.ef91793a.chunk.js.map": "/lol-inhouse/static/js/3.ef91793a.chunk.js.map",
+    "index.html": "/lol-inhouse/index.html",
+    "static/css/main.3b7514ab.chunk.css.map": "/lol-inhouse/static/css/main.3b7514ab.chunk.css.map",
+    "static/js/2.5f462f2b.chunk.js.LICENSE.txt": "/lol-inhouse/static/js/2.5f462f2b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.03090154.js",
+    "static/js/2.5f462f2b.chunk.js",
+    "static/css/main.3b7514ab.chunk.css",
+    "static/js/main.41cff52f.chunk.js"
+  ]
+}
