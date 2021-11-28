@@ -9,7 +9,7 @@ export const generateOutput = (inhouse) => {
   const padding = Math.max(...[...Object.keys(red.roster).map(x => red.roster[x].name.length),...Object.keys(blue.roster).map(x => blue.roster[x].name.length)]) + 10
   return `
   |${'-'.padEnd((padding+1)*2,'-')}|
-  | ${'🔵 BLUE SIDE'}${''.padEnd(padding*2-23)}${'🔴 RED SIDE'} |
+  | ${'🔵 BLUE SIDE'}${''.padEnd(padding*2-22)}${'🔴 RED SIDE'} |
   |${'-'.padEnd((padding+1)*2,'-')}|
   | ${blue.roster.top.name}${'TOP'.padStart(padding-blue.roster.top.name.length)}${''.padEnd(padding-red.roster.top.name.length)}${red.roster.top.name} |
   | ${blue.roster.jug.name}${'JUG'.padStart(padding-blue.roster.jug.name.length)}${''.padEnd(padding-red.roster.jug.name.length)}${red.roster.jug.name} |
@@ -32,7 +32,7 @@ export const generateAdvancedOutput = (inhouse) => {
   const eloPadding = Math.max(...[...Object.keys(red.roster).map(x => red.roster[x].elo.length),...Object.keys(blue.roster).map(x => blue.roster[x].elo.length)]) + 2
   return `
   |${'-'.padEnd(((namePadding*2)+(eloPadding*2)+50-23),'-')}|
-  | ${'🔵 BLUE SIDE'}${''.padEnd((namePadding*2)+(eloPadding*2)+25-23)}${'🔴 RED SIDE'} |
+  | ${'🔵 BLUE SIDE'}${''.padEnd((namePadding*2)+(eloPadding*2)+3)}${'🔴 RED SIDE'} |
   |${'-'.padEnd(((namePadding*2)+(eloPadding*2)+50-23),'-')}|
   | - | ELO ${''.padEnd(eloPadding-5)}| MMR  | PLAYER ${''.padEnd(namePadding*2-14)} PLAYER |  MMR |${''.padEnd(eloPadding-4)} ELO | - |
   |${'-'.padEnd(((namePadding*2)+(eloPadding*2)+50-23),'-')}|

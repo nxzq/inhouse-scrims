@@ -2,8 +2,11 @@ import func from 'lol-inhouse'
 import { useState } from 'react'
 
 import Input from '../components/Input'
+import Footer from '../components/Footer'
 
-import { /*generateOutput,*/ generateAdvancedOutput } from '../utils/output'
+import { generateOutput, generateAdvancedOutput } from '../utils/output'
+
+import layout from './layout.module.css'
 
 function App() {
 
@@ -79,22 +82,27 @@ function App() {
     e.preventDefault()
     try {
       const output = func(players)
-      setOutput(generateAdvancedOutput(output[0]))
+      setOutput(`Standard Output: \n ${generateOutput(output[0])} \nVerbose Output: \n ${generateAdvancedOutput(output[0])}`)
     } catch (e) {
       setOutput(e.message)
     }
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        {players.map((player,i) => <Input summoner={player} i={i} handleChange={handleChange} key={i} />)}
-        <input type="submit" value="Submit" />
-      </form>
-      <button onClick={handleClear}>Clear</button>
-      <pre>
-        {output}
-      </pre>
+    <div className={layout.view}>
+      <div className={layout.viewContent}>
+        <form onSubmit={handleSubmit}>
+          {players.map((player,i) => <Input summoner={player} i={i} handleChange={handleChange} key={i} />)}
+          <input type="submit" value="Submit" />
+        </form>
+        <pre>
+          {output}
+          <button onClick={handleClear}>Clear</button>
+        </pre>
+      </div>
+      <div className={layout.viewFooter}>
+        <Footer />
+      </div>
     </div>
   );
 }
