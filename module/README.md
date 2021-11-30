@@ -1,39 +1,46 @@
 # lol-inhouse
 
-description ...  
-Team MMR Δ  
-Average Lane MMR Δ (Lane Diff)  
-Role Preference  
-
+League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & average lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. 
 
 ## Usage
 
+lol-inhouse exports a default function that takes in an array of player objects, validates the input then returns an array of top 25th percentile games sorted from most to least recommended.
 
-### Input
+## Inputs
+
+An array length 10 of player objects
 ```json
-  [
     {
-      "name": "any string (16 max length)",
-      "elo":  "iron" | 
-              "bronze" | 
-              "silver" | 
-              "gold" | 
-              "platinum" | 
-              "diamond" | 
-              "master" | 
-              "challenger",
-      "roles":  [] // for fill 
-                or
-                [
-                  "top" | "jug" | "mid" | "bot" | "sup", 
-                  null | "top" | "jug" | "mid" | "bot" | "sup"
-                ] // for preference
-    },
-    ...
-  ]
+      "name": "any string",
+      "elo": "see allowed elo values",
+      "roles": ["see allowed roles values"]
+    }
 ```
+
+### Allowed ELO Values
+
+`"iron"` | `"bronze"` | `"silver"` | `"gold"` | `"platinum"` | `"diamond"` | `"master"` | `"challenger"`
+
+Additionally division support has been added for ranks iron - diamond, e.g. `Gold IV -> value: "gold4"`, `Diamond I -> value: "diamond1"`
+
+### Allowed Roles Values
+
+Roles is an array of a players role preference. An empty array is the same a queueing `fill` or no preference. Otherwise the 0 index of the array will be considered the players primary role and the 1 index (if populated) will be considered the players secondary role. For best results populate roles as an MMR modifier is applied to help ensure players are on role, currently fill players have no modifier applied to their MMR.
+
+`"top"` | `"jug"` | `"mid"` | `"bot"` | `"sup"` | 
+
+JUG primary role SUP secondary sole 
+`"roles": ["jug", "sup"]`
+
+Fill Player 
+`"roles": []`
+
+MID primary role no secondary role
+`"roles": ["mid"]`
+
 ### Examples:
-Primary/Secondary Role Player
+
+Platinum IV BOT main TOP secondary Player
 ```json
 {
   "name": "summoner 4",
@@ -41,7 +48,7 @@ Primary/Secondary Role Player
   "roles": ["bot", "top"]
 }
 ```
-Fill Player
+Diamond I Fill Player
 ```json
 {
   "name": "summoner 9",
@@ -49,7 +56,7 @@ Fill Player
   "roles": []
 }
 ```
-Single Role Player
+Gold III Support Player
 ```json
 {
   "name": "summoner 10",
@@ -58,120 +65,69 @@ Single Role Player
 }
 ```
 
-### Output
+## Output
+
+Returns a sorted array of lobby objects
+
 ```json
 {
   "red": {
-    "mmr": 8800,
-    "roster": {
-      "top": {
-        "name": "summoner 1",
-        "elo": "Silver III",
-        "roles": [
-          "top",
-          "sup"
-        ],
-        "mmr": 1450,
-        "autofill": false
-      },
-      "jug": {
-        "name": "summoner 2",
-        "elo": "Silver III",
-        "roles": [
-          "jug",
-          "sup"
-        ],
-        "mmr": 1450,
-        "autofill": false
-      },
-      "mid": {
-        "name": "summoner 3",
-        "elo": "Gold III",
-        "roles": [
-          "mid",
-          "bot"
-        ],
-        "mmr": 1750,
-        "autofill": false
-      },
-      "bot": {
-        "name": "summoner 4",
-        "elo": "Platinum IV",
-        "roles": [
-          "bot",
-          "top"
-        ],
-        "mmr": 2000,
-        "autofill": false
-      },
-      "sup": {
-        "name": "summoner 5",
-        "elo": "Platinum II",
-        "roles": [
-          "sup",
-          "mid"
-        ],
-        "mmr": 2150,
-        "autofill": false
-      }
-    }
+    "mmr"
+    "roster"
   },
   "blue": {
-    "mmr": 8750,
-    "roster": {
-      "top": {
-        "name": "summoner 6",
-        "elo": "Bronze II",
-        "roles": [
-          "sup",
-          "top"
-        ],
-        "mmr": 1125,
-        "autofill": false
-      },
-      "jug": {
-        "name": "summoner 7",
-        "elo": "Gold IV",
-        "roles": [
-          "sup",
-          "jug"
-        ],
-        "mmr": 1530,
-        "autofill": false
-      },
-      "mid": {
-        "name": "summoner 8",
-        "elo": "Platinum III",
-        "roles": [
-          "jug",
-          "mid"
-        ],
-        "mmr": 1845,
-        "autofill": false
-      },
-      "bot": {
-        "name": "summoner 9",
-        "elo": "Diamond I",
-        "roles": [],
-        "mmr": 2500,
-        "autofill": false
-      },
-      "sup": {
-        "name": "summoner 10",
-        "elo": "Gold III",
-        "roles": [
-          "sup"
-        ],
-        "mmr": 1750,
-        "autofill": false
-      }
-    }
+    "mmr"
+    "roster"
   },
   "metadata": {
-    "roleScore": 15,
-    "delta": 50,
-    "avgLaneDiff": 140,
-    "skillLevel": 17550
+    "roleScore"
+    "delta"
+    "avgLaneDiff"
+    "skillLevel"
   }
 }
+```
+
+### Teams
+
+Team object includes a team MMR value as well as a roster object that has keys for each role with players data. In the default return there are 2 team objects, on named `red` and one named `blue`, the red team will always have the higher MMR.
+
+```json
+    "team": {
+        "mmr": 8800,
+        "roster": {
+          "top": {
+            "name": "summoner 1",
+            "elo": "Silver III",
+            "roles": [
+              "top",
+              "sup"
+            ],
+            "mmr": 1450,
+            "autofill": false
+          },
+          "jug": { ... },
+          "mid": { ... },
+          "bot": { ... },
+          "sup": { ... }
+        }
+      }
+```
+
+### Metadata
+
+Includes data about the lobby
+
+* `skillLevel` -> total MMR of entire lobby
+* `delta` -> total MMR difference between the two teams
+* `aveLaneDiff` -> average MMR difference between each role between two teams (calculated as the larger of mean and median)
+* `roleScore` -> role preference score, 2 points are awarded for players in primary roles, 1 point for secondary
+
+```json
+    "metadata": {
+        "roleScore": 15,
+        "delta": 50,
+        "avgLaneDiff": 140,
+        "skillLevel": 17550
+      }
 ```
