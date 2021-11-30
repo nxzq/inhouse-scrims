@@ -108,10 +108,10 @@ Team object includes a team MMR value as well as a roster object that has keys f
             "mmr": 1450,
             "autofill": false
           },
-          "jug": { ... },
-          "mid": { ... },
-          "bot": { ... },
-          "sup": { ... }
+          "jug": { /*...*/ },
+          "mid": { /*...*/ },
+          "bot": { /*...*/ },
+          "sup": { /*...*/ }
         }
       }
 ```
