@@ -25,9 +25,11 @@ Additionally division support has been added for ranks iron - diamond, e.g. `Gol
 
 ### Allowed Roles Values
 
-Roles is an array of a players role preference. An empty array is the same a queueing `fill` or no preference. Otherwise the 0 index of the array will be considered the players primary role and the 1 index (if populated) will be considered the players secondary role. For best results populate roles as an MMR modifier is applied to help ensure players are on role, currently fill players have no modifier applied to their MMR.
+Roles is an array of a players role preference. An empty array is the same a queueing `fill` or no preference. Otherwise the 0 index of the array will be considered the players primary role and the 1 index (if populated) will be considered the players secondary role. For best results populate roles, as an MMR modifier is applied to help ensure players are on role, currently fill players have no modifier applied to their MMR.
 
-`"top"` | `"jug"` | `"mid"` | `"bot"` | `"sup"` | 
+`"top"` | `"jug"` | `"mid"` | `"bot"` | `"sup"`
+
+#### Examples
 
 JUG primary role SUP secondary sole 
 `"roles": ["jug", "sup"]`
@@ -38,7 +40,7 @@ Fill Player
 MID primary role no secondary role
 `"roles": ["mid"]`
 
-### Examples:
+### Example Inputs
 
 Platinum IV BOT main TOP secondary Player
 ```json
