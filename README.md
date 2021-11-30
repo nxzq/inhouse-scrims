@@ -6,27 +6,27 @@ League of Legends inhouse matchmaking solution. Attempts to honor role preferenc
 
 Primary/Secondary Role Player
 ```json
-{
-  "name": "summoner 4",
-  "elo": "platinum4",
-  "roles": ["bot", "top"]
-}
+    {
+      "name": "summoner",
+      "elo": "platinum4",
+      "roles": ["bot", "top"]
+    }
 ```
 Fill Player
 ```json
-{
-  "name": "summoner 9",
-  "elo": "diamond1",
-  "roles": []
-}
+    {
+      "name": "T1 OK GOOD YES",
+      "elo": "diamond1",
+      "roles": []
+    }
 ```
 Single Role Player
 ```json
-{
-  "name": "summoner 10",
-  "elo": "gold3",
-  "roles": ["sup"]
-}
+    {
+      "name": "hide on bush",
+      "elo": "challenger",
+      "roles": ["mid"]
+    }
 ```
 
 ## Interfaces

@@ -44,27 +44,27 @@ MID primary role no secondary role
 
 Platinum IV BOT main TOP secondary Player
 ```json
-{
-  "name": "summoner 4",
-  "elo": "platinum4",
-  "roles": ["bot", "top"]
-}
+    {
+      "name": "summoner 4",
+      "elo": "platinum4",
+      "roles": ["bot", "top"]
+    }
 ```
 Diamond I Fill Player
 ```json
-{
-  "name": "summoner 9",
-  "elo": "diamond1",
-  "roles": []
-}
+    {
+      "name": "summoner 9",
+      "elo": "diamond1",
+      "roles": []
+    }
 ```
 Gold III Support Player
 ```json
-{
-  "name": "summoner 10",
-  "elo": "gold3",
-  "roles": ["sup"]
-}
+    {
+      "name": "summoner 10",
+      "elo": "gold3",
+      "roles": ["sup"]
+    }
 ```
 
 ## Output
@@ -72,22 +72,22 @@ Gold III Support Player
 Returns a sorted array of lobby objects
 
 ```json
-{
-  "red": {
-    "mmr"
-    "roster"
-  },
-  "blue": {
-    "mmr"
-    "roster"
-  },
-  "metadata": {
-    "roleScore"
-    "delta"
-    "avgLaneDiff"
-    "skillLevel"
-  }
-}
+    {
+      "red": {
+        "mmr"
+        "roster"
+      },
+      "blue": {
+        "mmr"
+        "roster"
+      },
+      "metadata": {
+        "roleScore"
+        "delta"
+        "avgLaneDiff"
+        "skillLevel"
+      }
+    }
 ```
 
 ### Teams
