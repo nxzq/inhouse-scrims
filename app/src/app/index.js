@@ -1,16 +1,15 @@
-import func from 'lol-inhouse'
 import { useState } from 'react'
 
 import Input from '../components/Input'
+import Drafts from '../components/Drafts'
 import Footer from '../components/Footer'
-
-import { generateOutput, generateAdvancedOutput } from '../utils/output'
 
 import layout from './layout.module.css'
 
-function App() {
+export default function App() {
 
-  const [ output, setOutput ] = useState(null)
+  const [ errors, setErrors ] = useState(null)
+  const [ appState, setAppState ] = useState('input')
   const [ players, setPlayers ] = useState([
     {
       "name": "Buelow",
@@ -64,6 +63,13 @@ function App() {
     }
   ]) 
 
+  const toggleState = () => {
+    if (appState === 'input')
+      setAppState('drafts')
+    else
+      setAppState('input')
+  }
+
   const handleChange = (e, i) => {
     const summoners = players
     if (e.target.name === 'roles')
@@ -73,32 +79,40 @@ function App() {
     setPlayers([...summoners])
   }
 
-  const handleClear = () => {
+  const handleClear = (e) => {
+    e.preventDefault()
     setPlayers(Array.from({length: 10}, () => ({name: "", elo: "gold", roles: []})))
-    setOutput(null)
+    setErrors(null)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    try {
-      const output = func(players)
-      setOutput(`Standard Output: \n ${generateOutput(output[0])} \nVerbose Output: \n ${generateAdvancedOutput(output[0])}`)
-    } catch (e) {
-      setOutput(e.message)
-    }
+    setErrors(null)
+    toggleState()
   }
 
   return (
     <div className={layout.view}>
       <div className={layout.viewContent}>
-        <form onSubmit={handleSubmit}>
-          {players.map((player,i) => <Input summoner={player} i={i} handleChange={handleChange} key={i} />)}
-          <input type="submit" value="Submit" />
-        </form>
-        <pre>
-          {output}
-          <button onClick={handleClear}>Clear</button>
-        </pre>
+        {
+          appState === 'input' ? 
+          <>
+            <form onSubmit={handleSubmit}>
+              {players.map((player,i) => <Input summoner={player} i={i} handleChange={handleChange} key={i} />)}
+              {errors &&
+                <pre>
+                  {errors}
+                </pre>
+              }
+              <div style={{ padding: '1em', margin: '1em' }}>
+                <input type="submit" value="Submit" style={{ padding: '1em', margin: '1em', cursor: 'pointer' }} />
+                <button onClick={(e) => handleClear(e)} style={{ padding: '1em', margin: '1em', cursor: 'pointer' }}>Clear</button>
+              </div>
+            </form>
+          </> 
+          :
+          <Drafts players={players} toggleState={toggleState} setErrors={setErrors} />
+        }
       </div>
       <div className={layout.viewFooter}>
         <Footer />
@@ -106,5 +120,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

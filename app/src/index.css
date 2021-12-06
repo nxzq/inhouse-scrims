@@ -16,3 +16,9 @@ code {
   margin: 0;
   padding: 0;
 }
+
+button {
+  cursor: pointer;
+  padding: 1rem;
+  margin: 1rem;
+}
