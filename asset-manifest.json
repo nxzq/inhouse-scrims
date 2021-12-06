@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lol-inhouse/static/css/main.f38f092f.chunk.css",
-    "main.js": "/lol-inhouse/static/js/main.bbf08b06.chunk.js",
-    "main.js.map": "/lol-inhouse/static/js/main.bbf08b06.chunk.js.map",
+    "main.js": "/lol-inhouse/static/js/main.d0891d65.chunk.js",
+    "main.js.map": "/lol-inhouse/static/js/main.d0891d65.chunk.js.map",
     "runtime-main.js": "/lol-inhouse/static/js/runtime-main.b415b3c2.js",
     "runtime-main.js.map": "/lol-inhouse/static/js/runtime-main.b415b3c2.js.map",
     "static/js/2.9441cdbc.chunk.js": "/lol-inhouse/static/js/2.9441cdbc.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b415b3c2.js",
     "static/js/2.9441cdbc.chunk.js",
     "static/css/main.f38f092f.chunk.css",
-    "static/js/main.bbf08b06.chunk.js"
+    "static/js/main.d0891d65.chunk.js"
   ]
 }
