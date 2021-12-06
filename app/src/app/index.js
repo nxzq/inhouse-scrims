@@ -73,7 +73,7 @@ export default function App() {
   const handleChange = (e, i) => {
     const summoners = players
     if (e.target.name === 'roles')
-      summoners[i][e.target.name] = e.target.value.split(',')
+      summoners[i][e.target.name] = e.target.value.split(',').filter(x => x !== '')
     else
       summoners[i][e.target.name] = e.target.value
     setPlayers([...summoners])
