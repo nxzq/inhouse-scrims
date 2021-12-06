@@ -63,6 +63,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
   useEffect(() => {
     try {
       const output = func(players)
+      localStorage.setItem('players', JSON.stringify(players))
       setDrafts(output)
       setIndex(0)
       setProcessing(false)
@@ -87,7 +88,15 @@ export default function Drafts({ players, toggleState, setErrors }) {
 
   if (processing)
     return (
-      <div>
+      <div style={{ 
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: '-50px',
+        marginLeft: '-50px',
+        width: '100px',
+        height: '100px' 
+      }}>
         processing ... 
       </div>
     )

@@ -10,55 +10,55 @@ export default function App() {
 
   const [ errors, setErrors ] = useState(null)
   const [ appState, setAppState ] = useState('input')
-  const [ players, setPlayers ] = useState([
+  const [ players, setPlayers ] = useState(JSON.parse(localStorage.getItem('players')) || [
     {
-      "name": "Buelow",
-      "elo": "diamond1",
+      "name": "LettuceDog",
+      "elo": "diamond",
       "roles": []
     },
     {
-      "name": "Cbuelow",
-      "elo": "platinum4",
+      "name": "CrissCross",
+      "elo": "platinum",
       "roles": ["bot", "top"]
     },
     {
-      "name": "luckyc14",
-      "elo": "silver3",
+      "name": "Game0ver",
+      "elo": "silver",
       "roles": ["jug", "sup"]
     },
     {
-      "name": "walter",
-      "elo": "platinum3",
+      "name": "dude go long",
+      "elo": "platinum",
       "roles": ["jug", "mid"]
     },
     {
-      "name": "cal420swag",
-      "elo": "gold1",
+      "name": "undefinedBarracuda",
+      "elo": "gold",
       "roles": ["bot", "jug"]
     },
     {
-      "name": "snxckz",
-      "elo": "gold4",
-      "roles": []
+      "name": "Hypr",
+      "elo": "master",
+      "roles": ["mid"]
     },
     {
-      "name": "TurkeyAI",
-      "elo": "platinum1",
+      "name": "you sweat in casual",
+      "elo": "platinum",
       "roles": ["top", "jug"]
     },
     {
-      "name": "HIPP0B0SS",
-      "elo": "silver3",
+      "name": "I AM REX RYAN",
+      "elo": "silver",
       "roles": ["top", "sup"]
     },
     {
-      "name": "redsledge",
-      "elo": "gold3",
+      "name": "Bob Ross Ate My Son",
+      "elo": "gold",
       "roles": ["sup"]
     },
     {
-      "name": "deku kid",
-      "elo": "gold4",
+      "name": "AOL Account",
+      "elo": "gold",
       "roles": []
     }
   ]) 
