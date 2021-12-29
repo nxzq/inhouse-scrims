@@ -11,33 +11,9 @@ import master from '../img/ranks/Season_2019_-_Master_4.png'
 import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_4.png'
 import challenger from '../img/ranks/Season_2019_-_Challenger_4.png'
 
-function useOutsideAlerter(ref, setOpen) {
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false)
-      }
-    }
-
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref])
-}
-
 const Option = ({ option, selected, select, close }) => {
   const [hovered, setHovered] = useState(false)
   const toggleHover = () => setHovered(!hovered)
-
-  // Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-  // Highlighted: "text-white bg-gray-600", Not Highlighted: "text-gray-900"
 
   if (selected) {
     return (
@@ -49,6 +25,7 @@ const Option = ({ option, selected, select, close }) => {
         )}
         id="listbox-option-0"
         role="option"
+        aria-selected="true"
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
         onClick={close}
@@ -66,7 +43,6 @@ const Option = ({ option, selected, select, close }) => {
             !hovered && 'text-gray-600'
           )}
         >
-          {/* <!-- Heroicon name: solid/check --> */}
           <svg
             className="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +70,7 @@ const Option = ({ option, selected, select, close }) => {
       }
       id="listbox-option-0"
       role="option"
+      aria-selected="false"
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       onClick={() => select(option.value)}
@@ -120,6 +97,7 @@ export default function SelectRank({ elo, i, handleChange }) {
 
   const options = [
     { value: 'iron', name: 'Iron', src: iron },
+    { value: 'bronze', name: 'Bronze', src: bronze },
     { value: 'silver', name: 'Silver', src: silver },
     { value: 'gold', name: 'Gold', src: gold },
     { value: 'platinum', name: 'Platinum', src: platinum },
@@ -133,7 +111,18 @@ export default function SelectRank({ elo, i, handleChange }) {
     .map((x, i) => (x.value === elo ? i : null))
     .filter((x) => x)[0]
   const ref = useRef(null)
-  useOutsideAlerter(ref, setOpen)
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [ref, setOpen])
 
   return (
     <div ref={ref}>
