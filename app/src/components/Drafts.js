@@ -50,7 +50,7 @@ const copyOutput = (inhouse) => {
 \`\`\``
 }
 
-function RedSummoner({ summoner }) {
+const RoleRow = ({ blue, red, src, alt }) => {
   const ranks = {
     Iron: iron,
     Bronze: bronze,
@@ -64,49 +64,39 @@ function RedSummoner({ summoner }) {
   }
 
   return (
-    <span className="flex items-center">
-      <div className="flex flex-col mr-3 items-end">
-        <span className="block truncate text-2xl">{summoner.name}</span>
-        <span className="text-gray-400 block truncate">
-          Estimated MMR: <span className="text-gray-500">{summoner.mmr}</span>
+    <div className="grid grid-cols-5 md:m-2 min-w-full max-w-full">
+      <div className="col-span-2">
+        <span className="flex items-center">
+          <img
+            src={ranks[blue.elo]}
+            alt=""
+            className="flex-shrink-0 d:h-10 md:w-10 md:block hidden rounded-full"
+          />
+          <div className="flex flex-col ml-3 items-start">
+            <span className="block line-clamp-1 md:text-2xl">{blue.name}</span>
+            <span className="text-gray-400 block md:text-md text-sm line-clamp-1">
+              Est. MMR: <span className="text-gray-500">{blue.mmr}</span>
+            </span>
+          </div>
         </span>
       </div>
-      <img
-        src={ranks[summoner.elo]}
-        alt=""
-        className="flex-shrink-0 h-10 w-10 rounded-full"
-      />
-    </span>
-  )
-}
-
-function BlueSummoner({ summoner }) {
-  const ranks = {
-    Iron: iron,
-    Bronze: bronze,
-    Silver: silver,
-    Gold: gold,
-    Platinum: platinum,
-    Diamond: diamond,
-    Master: master,
-    Grandmaster: grandmaster,
-    Challenger: challenger,
-  }
-
-  return (
-    <span className="flex items-center">
-      <img
-        src={ranks[summoner.elo]}
-        alt=""
-        className="flex-shrink-0 h-10 w-10 rounded-full"
-      />
-      <div className="flex flex-col ml-3 items-start">
-        <span className="block truncate text-2xl">{summoner.name}</span>
-        <span className="text-gray-400 block truncate">
-          Estimated MMR: <span className="text-gray-500">{summoner.mmr}</span>
+      <img className="md:h-10 h-8 col-span-1 m-auto" src={src} alt={alt} />
+      <div className="col-span-2 ml-auto">
+        <span className="flex items-center">
+          <div className="flex flex-col mr-3 items-end">
+            <span className="block line-clamp-1 md:text-2xl">{red.name}</span>
+            <span className="text-gray-400 block md:text-md text-sm line-clamp-1">
+              Est. MMR: <span className="text-gray-500">{red.mmr}</span>
+            </span>
+          </div>
+          <img
+            src={ranks[red.elo]}
+            alt=""
+            className="flex-shrink-0 md:h-10 md:w-10 md:block hidden rounded-full"
+          />
         </span>
       </div>
-    </span>
+    </div>
   )
 }
 
@@ -114,64 +104,49 @@ function Draft({ lobby }) {
   return (
     <div className="p-2 m-2">
       <div className="flex justify-between mb-2">
-        <p className="text-2xl mx-auto">
+        <p className="text-2xl mx-auto md:block flex flex-col">
           🔵 Blue Team{' '}
-          <span className="text-gray-400">
+          <span className="text-gray-400 mx-auto md:text-lg text-sm">
             (Total MMR: <span className="text-gray-500">{lobby.blue.mmr}</span>)
           </span>
         </p>
-        <p className="text-2xl mx-auto">
+        <p className="text-2xl mx-auto md:block flex flex-col">
           🔴 Red Team{' '}
-          <span className="text-gray-400">
+          <span className="text-gray-400 mx-auto md:text-lg text-sm">
             (Total MMR: <span className="text-gray-500">{lobby.red.mmr}</span>)
           </span>
         </p>
       </div>
-      <div className="grid grid-cols-5 min-w-full">
-        <div className="col-span-2">
-          <BlueSummoner summoner={lobby.blue.roster.top} />
-        </div>
-        <img className="h-12 col-span-1 m-auto" src={top} alt="TOP" />
-        <div className="col-span-2 ml-auto">
-          <RedSummoner summoner={lobby.red.roster.top} />
-        </div>
-      </div>
-      <div className="grid grid-cols-5">
-        <div className="col-span-2">
-          <BlueSummoner summoner={lobby.blue.roster.jug} />
-        </div>
-        <img className="h-12 col-span-1 m-auto" src={jug} alt="JUG" />
-        <div className="col-span-2 ml-auto">
-          <RedSummoner summoner={lobby.red.roster.jug} />
-        </div>
-      </div>
-      <div className="grid grid-cols-5">
-        <div className="col-span-2">
-          <BlueSummoner summoner={lobby.blue.roster.mid} />
-        </div>
-        <img className="h-12 col-span-1 m-auto" src={mid} alt="MID" />
-        <div className="col-span-2 ml-auto">
-          <RedSummoner summoner={lobby.red.roster.mid} />
-        </div>
-      </div>
-      <div className="grid grid-cols-5">
-        <div className="col-span-2">
-          <BlueSummoner summoner={lobby.blue.roster.bot} />
-        </div>
-        <img className="h-12 col-span-1 m-auto" src={bot} alt="BOT" />
-        <div className="col-span-2 ml-auto">
-          <RedSummoner summoner={lobby.red.roster.bot} />
-        </div>
-      </div>
-      <div className="grid grid-cols-5">
-        <div className="col-span-2">
-          <BlueSummoner summoner={lobby.blue.roster.sup} />
-        </div>
-        <img className="h-12 col-span-1 m-auto" src={sup} alt="SUP" />
-        <div className="col-span-2 ml-auto">
-          <RedSummoner summoner={lobby.red.roster.sup} />
-        </div>
-      </div>
+      <RoleRow
+        blue={lobby.blue.roster.top}
+        red={lobby.red.roster.top}
+        src={top}
+        alt="TOP"
+      />
+      <RoleRow
+        blue={lobby.blue.roster.jug}
+        red={lobby.red.roster.jug}
+        src={jug}
+        alt="JUG"
+      />
+      <RoleRow
+        blue={lobby.blue.roster.mid}
+        red={lobby.red.roster.mid}
+        src={mid}
+        alt="MID"
+      />
+      <RoleRow
+        blue={lobby.blue.roster.bot}
+        red={lobby.red.roster.bot}
+        src={bot}
+        alt="BOT"
+      />
+      <RoleRow
+        blue={lobby.blue.roster.sup}
+        red={lobby.red.roster.sup}
+        src={sup}
+        alt="SUP"
+      />
     </div>
   )
 }
@@ -210,7 +185,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
   if (processing)
     return (
       <div className="text-gray-500 m-auto">
-        <p>analyzing 1,814,400 possible lobbies please wait  ...</p>
+        <p>analyzing 1,814,400 possible lobbies please wait ...</p>
       </div>
     )
 
