@@ -64,7 +64,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
   }
 
   return (
-    <div className="grid grid-cols-5 md:m-2 min-w-full max-w-full">
+    <div className="grid grid-cols-5 md:m-2">
       <div className="col-span-2">
         <span className="flex items-center">
           <img
@@ -102,8 +102,8 @@ const RoleRow = ({ blue, red, src, alt }) => {
 
 function Draft({ lobby }) {
   return (
-    <div className="p-2 m-2">
-      <div className="flex justify-between mb-2">
+    <div className="p-2 m-2 lg:mx-12">
+      <div className="flex justify-between mb-4 p-2 border-b border-gray">
         <p className="text-2xl mx-auto md:block flex flex-col">
           🔵 Blue Team{' '}
           <span className="text-gray-400 mx-auto md:text-lg text-sm">
@@ -206,7 +206,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
           flexWrap: 'wrap',
         }}
       >
-        <button onClick={copy} className="btn flex">
+        <button onClick={copy} className="btn w-28">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 mr-2"
@@ -226,7 +226,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
         <button
           onClick={() => changeIndex(-1)}
           disabled={index === 0}
-          className="btn flex"
+          className="btn w-32"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +247,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
         <button
           onClick={() => changeIndex(1)}
           disabled={index + 1 === drafts.length}
-          className="btn flex"
+          className="btn w-32"
         >
           Next
           <svg
@@ -265,7 +265,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
             />
           </svg>
         </button>
-        <button onClick={() => toggleState()} className="btn">
+        <button onClick={() => toggleState()} className="btn w-24">
           Back
         </button>
       </div>
