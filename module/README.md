@@ -1,6 +1,6 @@
 # lol-inhouse
 
-League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & average lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. 
+League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. 
 
 ## Usage
 
@@ -84,7 +84,7 @@ Returns a sorted array of lobby objects
       "metadata": {
         "roleScore"
         "delta"
-        "avgLaneDiff"
+        "laneDelta"
         "skillLevel"
       }
     }
@@ -122,14 +122,14 @@ Includes data about the lobby
 
 * `skillLevel` -> total MMR of entire lobby
 * `delta` -> total MMR difference between the two teams
-* `aveLaneDiff` -> average MMR difference between each role between two teams (calculated as the larger of mean and median)
+* `laneDelta` -> MMR difference between each role between two teams (calculated as the sum of the absolute value of all role differences)
 * `roleScore` -> role preference score, 2 points are awarded for players in primary roles, 1 point for secondary
 
 ```json
     "metadata": {
         "roleScore": 15,
         "delta": 50,
-        "avgLaneDiff": 140,
+        "laneDelta": 240,
         "skillLevel": 17550
       }
 ```

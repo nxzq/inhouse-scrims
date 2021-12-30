@@ -6,20 +6,12 @@ const {
 const draft = require('./draft')
 const analyze = require('./analyze')
 
-const getAverageDelta = (mmrBreakdown) => {
+const getLaneDelta = (mmrBreakdown) => {
   let deltas = []
   for (let i = 0; i < 5; i++) {
     deltas.push(Math.abs(mmrBreakdown[i] - mmrBreakdown[i+5]))
   }
-  return deltas.reduce((a, b) => a + b) / 10;
-}
-
-const getMedianDelta = (mmrBreakdown) => {
-  let deltas = []
-  for (let i = 0; i < 5; i++) {
-    deltas.push(Math.abs(mmrBreakdown[i] - mmrBreakdown[i+5]))
-  }
-  return deltas.sort()[3];
+  return deltas.reduce((a, b) => a + b)
 }
 
 const getRoleStatusArray = (players) => {
@@ -39,13 +31,12 @@ const getRoleStatusArray = (players) => {
 const getDraftMetadata = (draft, players) => {
   const lobby = draft.map(x => players[x])
   const rolesBreakdown = getRoleStatusArray(lobby)
-  const mmrBreakdown = lobby.map((x,i) => MMR[x.elo]*MMR_MODIFIER[rolesBreakdown[i]])
+  const mmrBreakdown = lobby.map((x,i) => MMR[x.elo]-MMR_MODIFIER[rolesBreakdown[i]])
   const team1Players = lobby.slice(0, 5)
   const team2Players = lobby.slice(5)
   const team1Mmr = team1Players.reduce((x, y, i) => x + mmrBreakdown[i], 0)
   const team2Mmr = team2Players.reduce((x, y, i) => x + mmrBreakdown[i+5], 0)
-  const avgDelta = getAverageDelta(mmrBreakdown)
-  const medianDelta = getMedianDelta(mmrBreakdown)
+  const laneDelta = getLaneDelta(mmrBreakdown)
   const roleScore = rolesBreakdown.map(x => {
     if (x === 'primary')
       return 2
@@ -59,8 +50,8 @@ const getDraftMetadata = (draft, players) => {
     team1Mmr,
     team2Mmr,
     roleScore,
+    laneDelta,
     delta: Math.abs(team1Mmr - team2Mmr),
-    avgLaneDiff: Math.max(avgDelta, medianDelta),
     skillLevel: team1Mmr + team2Mmr
   }
 }
@@ -83,7 +74,7 @@ const prettyRank = (elo) => {
 const prettyOutput = (game, players) =>{
   const roster = game.draft.map(x => players[x])
   const rolesBreakdown = getRoleStatusArray(roster)
-  const mmrBreakdown = roster.map((x,i) => MMR[x.elo]*MMR_MODIFIER[rolesBreakdown[i]])
+  const mmrBreakdown = roster.map((x,i) => MMR[x.elo]-MMR_MODIFIER[rolesBreakdown[i]])
   const { team1Mmr, team2Mmr, draft, ...metadata } = game
   const team1 = {
     roster: {

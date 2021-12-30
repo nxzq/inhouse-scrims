@@ -14,8 +14,8 @@ const filterDelta = (lobbies, deltaValuesThreshold) => {
   return lobbies.filter(x => x.delta <= deltaValuesThreshold)
 }
 
-const filterAvgLaneDiff = (lobbies, avgLaneDiffThreshold) => {
-  return lobbies.filter(x => x.avgLaneDiff <= avgLaneDiffThreshold)
+const filterLaneDelta = (lobbies, laneDeltaThreshold) => {
+  return lobbies.filter(x => x.laneDelta <= laneDeltaThreshold)
 }
 
 const filterRoleScore = (lobbies, roleScoreThreshold) => {
@@ -33,13 +33,13 @@ const filterSkillLevel = (lobbies, skillLevelThreshold) => {
  */
 module.exports = function(games) {
   let options = games
-  const avgLaneDiffThreshold = quantile(options.map(x => x.avgLaneDiff),.25)
-  options = filterAvgLaneDiff(options, avgLaneDiffThreshold)
-  const roleScoreThreshold = quantile(options.map(x => x.roleScore),.75)
+  const laneDeltaThreshold = quantile(options.map(x => x.laneDelta),.5)
+  options = filterLaneDelta(options, laneDeltaThreshold)
+  const roleScoreThreshold = quantile(options.map(x => x.roleScore),.5)
   options = filterRoleScore(options, roleScoreThreshold)
-  const deltaValuesThreshold = quantile(options.map(x => x.delta),.10)
+  const deltaValuesThreshold = quantile(options.map(x => x.delta),.5)
   options = filterDelta(options, deltaValuesThreshold)
-  const skillLevelThreshold = quantile(options.map(x => x.skillLevel),.75)
+  const skillLevelThreshold = quantile(options.map(x => x.skillLevel),.5)
   options = filterSkillLevel(options, skillLevelThreshold)
   return options.sort((a,b) => {
     if (a.delta - b.delta === 0)
