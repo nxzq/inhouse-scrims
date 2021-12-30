@@ -210,7 +210,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
   if (processing)
     return (
       <div className="text-gray-500 m-auto">
-        <p>please wait analyzing 1,814,400 possible lobbies ...</p>
+        <p>analyzing 1,814,400 possible lobbies please wait  ...</p>
       </div>
     )
 
