@@ -1,24 +1,15 @@
 {
   "files": {
     "main.css": "/lol-inhouse/static/css/main.86d4c025.css",
-    "main.js": "/lol-inhouse/static/js/main.1a64f41d.js",
+    "main.js": "/lol-inhouse/static/js/main.4f91b17f.js",
     "static/js/787.083afb34.chunk.js": "/lol-inhouse/static/js/787.083afb34.chunk.js",
-    "static/media/Season_2019_-_Challenger_4.png": "/lol-inhouse/static/media/Season_2019_-_Challenger_4.1c3651029fe6c39e6538.png",
-    "static/media/Season_2019_-_Master_4.png": "/lol-inhouse/static/media/Season_2019_-_Master_4.2a3ce26c8b4616249125.png",
-    "static/media/Season_2019_-_Grandmaster_4.png": "/lol-inhouse/static/media/Season_2019_-_Grandmaster_4.d66c901666fcb680d33a.png",
-    "static/media/Season_2019_-_Diamond_4.png": "/lol-inhouse/static/media/Season_2019_-_Diamond_4.b971689c0cfbb5474992.png",
-    "static/media/Season_2019_-_Platinum_4.png": "/lol-inhouse/static/media/Season_2019_-_Platinum_4.46da4962e6e13380b2eb.png",
-    "static/media/Season_2019_-_Silver_4.png": "/lol-inhouse/static/media/Season_2019_-_Silver_4.2e7a180adb649bd92190.png",
-    "static/media/Season_2019_-_Gold_4.png": "/lol-inhouse/static/media/Season_2019_-_Gold_4.6157655be5e324ae9433.png",
-    "static/media/Season_2019_-_Bronze_4.png": "/lol-inhouse/static/media/Season_2019_-_Bronze_4.4d8edd7e6b1eb4e4f9de.png",
-    "static/media/Season_2019_-_Iron_4.png": "/lol-inhouse/static/media/Season_2019_-_Iron_4.2a4ed04419ff58b92511.png",
     "index.html": "/lol-inhouse/index.html",
     "main.86d4c025.css.map": "/lol-inhouse/static/css/main.86d4c025.css.map",
-    "main.1a64f41d.js.map": "/lol-inhouse/static/js/main.1a64f41d.js.map",
+    "main.4f91b17f.js.map": "/lol-inhouse/static/js/main.4f91b17f.js.map",
     "787.083afb34.chunk.js.map": "/lol-inhouse/static/js/787.083afb34.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.86d4c025.css",
-    "static/js/main.1a64f41d.js"
+    "static/js/main.4f91b17f.js"
   ]
 }
