@@ -35,10 +35,10 @@ const MMR = Object.freeze({
 })
 
 const MMR_MODIFIER = Object.freeze({
-  "fill":1,
-  "primary":1,
-  "secondary": .9,
-  "autofill": .5,
+  "fill": 0,
+  "primary": 0,
+  "secondary": 100,
+  "autofill": 500,
 })
 
 const ROLES_BY_INDEX = Object.freeze(["top", "jug", "mid", "bot", "sup", "top", "jug", "mid", "bot", "sup"])

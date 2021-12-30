@@ -1,6 +1,6 @@
 # lol-inhouse
 
-League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & average lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. Learn more about the [algorithm here](/module/README.md).
+League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. Learn more about the [algorithm here](/module/README.md).
 
 ## Example Inputs
 
@@ -31,4 +31,6 @@ Single Role Player
 
 ## Interfaces
 
-Current plan is to implement a [react app](/app/README.md), [discord bot](/bot/README.md) and [cli](/cli/README.md) interfaces.
+Currently implemented in a [react app](/app/README.md) interface
+
+https://nicklas-io.github.io/lol-inhouse
