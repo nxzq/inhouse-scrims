@@ -7,15 +7,15 @@ import mid from '../img/roles/MIDDLE.png'
 import bot from '../img/roles/ADC.png'
 import sup from '../img/roles/SUPPORT.png'
 
-import iron from '../img/ranks/Season_2019_-_Iron_4.png'
-import bronze from '../img/ranks/Season_2019_-_Bronze_4.png'
-import silver from '../img/ranks/Season_2019_-_Silver_4.png'
-import gold from '../img/ranks/Season_2019_-_Gold_4.png'
-import platinum from '../img/ranks/Season_2019_-_Platinum_4.png'
-import diamond from '../img/ranks/Season_2019_-_Diamond_4.png'
-import master from '../img/ranks/Season_2019_-_Master_4.png'
-import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_4.png'
-import challenger from '../img/ranks/Season_2019_-_Challenger_4.png'
+import iron from '../img/ranks/Season_2019_-_Iron_4-min.png'
+import bronze from '../img/ranks/Season_2019_-_Bronze_4-min.png'
+import silver from '../img/ranks/Season_2019_-_Silver_4-min.png'
+import gold from '../img/ranks/Season_2019_-_Gold_4-min.png'
+import platinum from '../img/ranks/Season_2019_-_Platinum_4-min.png'
+import diamond from '../img/ranks/Season_2019_-_Diamond_4-min.png'
+import master from '../img/ranks/Season_2019_-_Master_4-min.png'
+import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_4-min.png'
+import challenger from '../img/ranks/Season_2019_-_Challenger_4-min.png'
 
 const copyOutput = (inhouse) => {
   const blue = inhouse.blue
@@ -75,7 +75,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
           <div className="flex flex-col ml-3 items-start">
             <span className="block line-clamp-1 md:text-2xl">{blue.name}</span>
             <span className="text-gray-400 block md:text-md text-sm line-clamp-1">
-              Est. MMR: <span className="text-gray-500">{blue.mmr}</span>
+              MMR: <span className="text-gray-500">{blue.mmr}</span>
             </span>
           </div>
         </span>
@@ -86,7 +86,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
           <div className="flex flex-col mr-3 items-end">
             <span className="block line-clamp-1 md:text-2xl">{red.name}</span>
             <span className="text-gray-400 block md:text-md text-sm line-clamp-1">
-              Est. MMR: <span className="text-gray-500">{red.mmr}</span>
+              MMR: <span className="text-gray-500">{red.mmr}</span>
             </span>
           </div>
           <img
