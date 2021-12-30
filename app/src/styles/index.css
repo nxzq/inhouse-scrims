@@ -4,6 +4,6 @@
 
 @layer components {
   .btn {
-    @apply cursor-pointer border-indigo-200 border-2 border-solid rounded p-2 m-2;
+    @apply cursor-pointer border-gray-200 border-2 border-solid rounded p-2 m-2;
   }
 }

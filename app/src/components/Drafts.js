@@ -67,8 +67,8 @@ function RedSummoner({ summoner }) {
     <span className="flex items-center">
       <div className="flex flex-col mr-3 items-end">
         <span className="block truncate text-2xl">{summoner.name}</span>
-        <span className="text-indigo-300 block truncate">
-          Estimated MMR: <span className="text-indigo-400">{summoner.mmr}</span>
+        <span className="text-gray-400 block truncate">
+          Estimated MMR: <span className="text-gray-500">{summoner.mmr}</span>
         </span>
       </div>
       <img
@@ -102,8 +102,8 @@ function BlueSummoner({ summoner }) {
       />
       <div className="flex flex-col ml-3 items-start">
         <span className="block truncate text-2xl">{summoner.name}</span>
-        <span className="text-indigo-300 block truncate">
-          Estimated MMR: <span className="text-indigo-400">{summoner.mmr}</span>
+        <span className="text-gray-400 block truncate">
+          Estimated MMR: <span className="text-gray-500">{summoner.mmr}</span>
         </span>
       </div>
     </span>
@@ -111,17 +111,20 @@ function BlueSummoner({ summoner }) {
 }
 
 function Draft({ lobby }) {
-  console.log(lobby)
   return (
     <div className="p-2 m-2">
       <div className="flex justify-between mb-2">
         <p className="text-2xl mx-auto">
           🔵 Blue Team{' '}
-          <span className="text-indigo-300">(Total MMR: {lobby.blue.mmr})</span>
+          <span className="text-gray-400">
+            (Total MMR: <span className="text-gray-500">{lobby.blue.mmr}</span>)
+          </span>
         </p>
         <p className="text-2xl mx-auto">
           🔴 Red Team{' '}
-          <span className="text-indigo-300">(Total MMR: {lobby.red.mmr})</span>
+          <span className="text-gray-400">
+            (Total MMR: <span className="text-gray-500">{lobby.red.mmr}</span>)
+          </span>
         </p>
       </div>
       <div className="grid grid-cols-5 min-w-full">
@@ -206,18 +209,8 @@ export default function Drafts({ players, toggleState, setErrors }) {
 
   if (processing)
     return (
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          marginTop: '-50px',
-          marginLeft: '-50px',
-          width: '100px',
-          height: '100px',
-        }}
-      >
-        processing ...
+      <div className="text-gray-500 m-auto">
+        <p>please wait analyzing 1,814,400 possible lobbies ...</p>
       </div>
     )
 

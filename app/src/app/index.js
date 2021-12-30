@@ -70,9 +70,8 @@ export default function App() {
   }
 
   const handleChange = (e, i) => {
-    const summoners = players
+    const summoners = [...players]
     if (e.target.name === 'roles') {
-      console.log('handler', e.target.value)
       summoners[i][e.target.name] = e.target.value
     } else summoners[i][e.target.name] = e.target.value
     setPlayers([...summoners])
