@@ -28,9 +28,3 @@ Single Role Player
       "roles": ["mid"]
     }
 ```
-
-## Interfaces
-
-Currently implemented in a [react app](/app/README.md) interface
-
-https://nicklas-io.github.io/lol-inhouse
