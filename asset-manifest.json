@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/lol-inhouse/static/css/main.86d4c025.css",
-    "main.js": "/lol-inhouse/static/js/main.60624d20.js",
+    "main.js": "/lol-inhouse/static/js/main.1a64f41d.js",
     "static/js/787.083afb34.chunk.js": "/lol-inhouse/static/js/787.083afb34.chunk.js",
     "static/media/Season_2019_-_Challenger_4.png": "/lol-inhouse/static/media/Season_2019_-_Challenger_4.1c3651029fe6c39e6538.png",
     "static/media/Season_2019_-_Master_4.png": "/lol-inhouse/static/media/Season_2019_-_Master_4.2a3ce26c8b4616249125.png",
@@ -14,11 +14,11 @@
     "static/media/Season_2019_-_Iron_4.png": "/lol-inhouse/static/media/Season_2019_-_Iron_4.2a4ed04419ff58b92511.png",
     "index.html": "/lol-inhouse/index.html",
     "main.86d4c025.css.map": "/lol-inhouse/static/css/main.86d4c025.css.map",
-    "main.60624d20.js.map": "/lol-inhouse/static/js/main.60624d20.js.map",
+    "main.1a64f41d.js.map": "/lol-inhouse/static/js/main.1a64f41d.js.map",
     "787.083afb34.chunk.js.map": "/lol-inhouse/static/js/787.083afb34.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.86d4c025.css",
-    "static/js/main.60624d20.js"
+    "static/js/main.1a64f41d.js"
   ]
 }
