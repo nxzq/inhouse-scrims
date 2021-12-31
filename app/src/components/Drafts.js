@@ -192,20 +192,12 @@ export default function Drafts({ players, toggleState, setErrors }) {
   return (
     <div>
       <Draft lobby={drafts[index]} />
-      <div style={{ padding: '1em', margin: '1em' }}>
+      <div className="p-2 m-2">
         <p>
           Draft {index + 1} of {drafts.length} suitable lobbies
         </p>
       </div>
-      <div
-        style={{
-          padding: '1em',
-          margin: '1em',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          flexWrap: 'wrap',
-        }}
-      >
+      <div className="flex justify-start flex-wrap m-2 p-2">
         <button onClick={copy} className="btn w-28">
           <svg
             xmlns="http://www.w3.org/2000/svg"
