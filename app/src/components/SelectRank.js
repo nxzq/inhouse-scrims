@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 
-import iron from '../img/ranks/Season_2019_-_Iron_1-min.png'
-import bronze from '../img/ranks/Season_2019_-_Bronze_1-min.png'
-import silver from '../img/ranks/Season_2019_-_Silver_1-min.png'
-import gold from '../img/ranks/Season_2019_-_Gold_1-min.png'
-import platinum from '../img/ranks/Season_2019_-_Platinum_1-min.png'
-import diamond from '../img/ranks/Season_2019_-_Diamond_1-min.png'
-import master from '../img/ranks/Season_2019_-_Master_1-min.png'
-import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_1-min.png'
-import challenger from '../img/ranks/Season_2019_-_Challenger_1-min.png'
+import iron from '../img/ranks/Season_2019_-_Iron_3-min.png'
+import bronze from '../img/ranks/Season_2019_-_Bronze_3-min.png'
+import silver from '../img/ranks/Season_2019_-_Silver_3-min.png'
+import gold from '../img/ranks/Season_2019_-_Gold_3-min.png'
+import platinum from '../img/ranks/Season_2019_-_Platinum_3-min.png'
+import diamond from '../img/ranks/Season_2019_-_Diamond_3-min.png'
+import master from '../img/ranks/Season_2019_-_Master_3-min.png'
+import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_3-min.png'
+import challenger from '../img/ranks/Season_2019_-_Challenger_3-min.png'
 
 const handleTab = (e, setOpen, select, selected, value, index, length) => {
   if (e.keyCode === 13 && !selected) select(value)

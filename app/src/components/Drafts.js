@@ -7,15 +7,15 @@ import mid from '../img/roles/MIDDLE.png'
 import bot from '../img/roles/ADC.png'
 import sup from '../img/roles/SUPPORT.png'
 
-import iron from '../img/ranks/Season_2019_-_Iron_1-min.png'
-import bronze from '../img/ranks/Season_2019_-_Bronze_1-min.png'
-import silver from '../img/ranks/Season_2019_-_Silver_1-min.png'
-import gold from '../img/ranks/Season_2019_-_Gold_1-min.png'
-import platinum from '../img/ranks/Season_2019_-_Platinum_1-min.png'
-import diamond from '../img/ranks/Season_2019_-_Diamond_1-min.png'
-import master from '../img/ranks/Season_2019_-_Master_1-min.png'
-import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_1-min.png'
-import challenger from '../img/ranks/Season_2019_-_Challenger_1-min.png'
+import iron from '../img/ranks/Season_2019_-_Iron_3-min.png'
+import bronze from '../img/ranks/Season_2019_-_Bronze_3-min.png'
+import silver from '../img/ranks/Season_2019_-_Silver_3-min.png'
+import gold from '../img/ranks/Season_2019_-_Gold_3-min.png'
+import platinum from '../img/ranks/Season_2019_-_Platinum_3-min.png'
+import diamond from '../img/ranks/Season_2019_-_Diamond_3-min.png'
+import master from '../img/ranks/Season_2019_-_Master_3-min.png'
+import grandmaster from '../img/ranks/Season_2019_-_Grandmaster_3-min.png'
+import challenger from '../img/ranks/Season_2019_-_Challenger_3-min.png'
 
 const copyOutput = (inhouse) => {
   const blue = inhouse.blue
@@ -192,29 +192,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
   return (
     <div>
       <Draft lobby={drafts[index]} />
-      <div className="p-2 m-2">
-        <p>
-          Draft {index + 1} of {drafts.length} suitable lobbies
-        </p>
-      </div>
-      <div className="flex justify-start flex-wrap m-2 p-2">
-        <button onClick={copy} className="btn w-28">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-            />
-          </svg>
-          Copy
-        </button>
+      <div className="flex justify-start flex-wrap m-4 p-2 lg:mx-12">
         <button
           onClick={() => changeIndex(-1)}
           disabled={index === 0}
@@ -236,6 +214,9 @@ export default function Drafts({ players, toggleState, setErrors }) {
           </svg>
           Previous
         </button>
+        <div className="bg-gray-100 text-gray-600 rounded-full p-2 m-2">
+          {index + 1} / {drafts.length}
+        </div>
         <button
           onClick={() => changeIndex(1)}
           disabled={index + 1 === drafts.length}
@@ -256,6 +237,23 @@ export default function Drafts({ players, toggleState, setErrors }) {
               d="M13 7l5 5m0 0l-5 5m5-5H6"
             />
           </svg>
+        </button>
+        <button onClick={copy} className="btn w-28">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+            />
+          </svg>
+          Copy
         </button>
         <button onClick={() => toggleState()} className="btn w-24">
           Back
