@@ -32,7 +32,7 @@ export default function App() {
         roles: ['jug', 'mid'],
       },
       {
-        name: 'undefinedBarracuda',
+        name: 'barracuda',
         elo: 'gold',
         roles: ['bot', 'jug'],
       },
@@ -96,6 +96,14 @@ export default function App() {
       <div className={layout.viewContent}>
         {appState === 'input' ? (
           <>
+            {errors && (
+              <div className="ml-2">
+                <span className="text-rose-700 font-semibold uppercase">
+                  Errors
+                </span>
+                <pre>{errors}</pre>
+              </div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="lg:grid lg:grid-cols-2 m-2">
                 {players.map((player, i) => (
@@ -107,9 +115,20 @@ export default function App() {
                   />
                 ))}
               </div>
-              {errors && <pre>{errors}</pre>}
+              {errors && (
+                <div className="ml-2">
+                  <span className="text-rose-700 font-semibold uppercase">
+                    Errors
+                  </span>
+                  <pre>{errors}</pre>
+                </div>
+              )}
               <div className="flex p-2 m-2">
-                <input type="submit" value="Submit" className="btn w-32" />
+                <input
+                  type="submit"
+                  value="Generate Inhouse Lobbies"
+                  className="btn w-60"
+                />
                 <button onClick={(e) => handleClear(e)} className="btn w-24">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

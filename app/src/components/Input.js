@@ -4,7 +4,7 @@ import SelectRole from '../components/SelectRole'
 export default function SummonerInput({ summoner, i, handleChange }) {
   return (
     <div className="relative max-w-6xl m-2 py-2 px-4 bg-gray-50 shadow-md rounded-lg">
-      <div className="absolute top-0 right-0 bg-gray-100 text-gray-600 rounded-full p-1 mr-4 mt-1">
+      <div className="absolute top-0 right-0 bg-gray-100 text-gray-600 rounded-full p-2 mr-4 mt-1">
         Player {i + 1}
       </div>
       <div className="md:flex">
