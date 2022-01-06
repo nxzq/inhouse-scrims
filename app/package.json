@@ -1,7 +1,7 @@
 {
   "name": "lol-inhouse-app",
   "version": "0.1.0",
-  "homepage": "https://nicklas-io.github.io/lol-inhouse",
+  "homepage": "https://exclamationpointhuman.github.io/lol-inhouse",
   "private": true,
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.3.0",
