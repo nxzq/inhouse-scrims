@@ -65,6 +65,23 @@ function getOrdinalSuffix(i) {
   return i + 'th'
 }
 
+const RoleScore = ({rank}) => {
+  console.log(rank)
+  if (rank === 1) {
+    return (
+      <span className="text-emerald-500 uppercase">Great</span>
+    )
+  }
+  if (rank === 2) {
+    return (
+      <span className="text-lime-500 uppercase">Good</span>
+    )
+  }
+  return (
+    <span className="text-yellow-500 uppercase">Fair</span>
+  )
+}
+
 const RoleRow = ({ blue, red, src, alt }) => {
   const ranks = {
     Iron: iron,
@@ -268,7 +285,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
         <div className="ml-1">
           Role Preference Score:{' '}
           <span className="font-semibold text-gray-700">
-            {getOrdinalSuffix(drafts[index].rank.role)}
+            <RoleScore rank={drafts[index].rank.role} />
           </span>
         </div>
       </div>
