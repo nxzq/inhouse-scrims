@@ -1,4 +1,4 @@
-import func from 'lol-inhouse'
+import matchmaking from 'lol-inhouse'
 import { useState, useEffect } from 'react'
 
 import top from '../img/roles/TOP.png'
@@ -50,6 +50,21 @@ const copyOutput = (inhouse) => {
 \`\`\``
 }
 
+function getOrdinalSuffix(i) {
+  const j = i % 10,
+    k = i % 100
+  if (j === 1 && k !== 11) {
+    return i + 'st'
+  }
+  if (j === 2 && k !== 12) {
+    return i + 'nd'
+  }
+  if (j === 3 && k !== 13) {
+    return i + 'rd'
+  }
+  return i + 'th'
+}
+
 const RoleRow = ({ blue, red, src, alt }) => {
   const ranks = {
     Iron: iron,
@@ -64,7 +79,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
   }
 
   return (
-    <div className="grid grid-cols-5 md:m-2">
+    <div className="grid grid-cols-5 md:m-4 lg:mx-20">
       <div className="col-span-2">
         <span className="flex items-center">
           <img
@@ -72,10 +87,12 @@ const RoleRow = ({ blue, red, src, alt }) => {
             alt=""
             className="flex-shrink-0 d:h-10 md:w-10 md:block hidden rounded-full"
           />
-          <div className="flex flex-col ml-3 items-start">
-            <span className="block line-clamp-1 md:text-2xl">{blue.name}</span>
-            <span className="text-gray-400 block md:text-md text-sm line-clamp-1">
-              MMR: <span className="text-gray-500">{blue.mmr}</span>
+          <div className="flex flex-col ml-2 items-start">
+            <span className="block line-clamp-1 break-all text-lg md:text-2xl">
+              {blue.name}
+            </span>
+            <span className="text-gray-500 block md:text-md text-sm line-clamp-1">
+              MMR: <span className="text-gray-600">{blue.mmr}</span>
             </span>
           </div>
         </span>
@@ -83,10 +100,12 @@ const RoleRow = ({ blue, red, src, alt }) => {
       <img className="md:h-10 h-8 col-span-1 m-auto" src={src} alt={alt} />
       <div className="col-span-2 ml-auto">
         <span className="flex items-center">
-          <div className="flex flex-col mr-3 items-end">
-            <span className="block line-clamp-1 md:text-2xl">{red.name}</span>
-            <span className="text-gray-400 block md:text-md text-sm line-clamp-1">
-              MMR: <span className="text-gray-500">{red.mmr}</span>
+          <div className="flex flex-col mr-2 items-end">
+            <span className="block line-clamp-1 break-all text-lg md:text-2xl">
+              {red.name}
+            </span>
+            <span className="text-gray-500 block md:text-md text-sm line-clamp-1">
+              MMR: <span className="text-gray-600">{red.mmr}</span>
             </span>
           </div>
           <img
@@ -104,16 +123,16 @@ function Draft({ lobby }) {
   return (
     <div className="p-2 m-2 lg:mx-12">
       <div className="flex justify-between mb-4 p-2 border-b border-gray">
-        <p className="text-2xl mx-auto md:block flex flex-col">
-          🔵 Blue Team{' '}
-          <span className="text-gray-400 mx-auto md:text-lg text-sm">
-            (Total MMR: <span className="text-gray-500">{lobby.blue.mmr}</span>)
+        <p className="bg-gradient-to-r from-blue-300 p-4 rounded-l-lg uppercase font-semibold text-2xl mx-auto md:block flex flex-col">
+          Blue Team{' '}
+          <span className="text-gray-500 mx-auto md:text-lg text-sm">
+            (Total MMR: <span className="text-gray-600">{lobby.blue.mmr}</span>)
           </span>
         </p>
-        <p className="text-2xl mx-auto md:block flex flex-col">
-          🔴 Red Team{' '}
-          <span className="text-gray-400 mx-auto md:text-lg text-sm">
-            (Total MMR: <span className="text-gray-500">{lobby.red.mmr}</span>)
+        <p className="bg-gradient-to-r from-rose-300 p-4 rounded-l-lg uppercase font-semibold text-2xl mx-auto md:block flex flex-col">
+          Red Team{' '}
+          <span className="text-gray-500 mx-auto md:text-lg text-sm">
+            (Total MMR: <span className="text-gray-600">{lobby.red.mmr}</span>)
           </span>
         </p>
       </div>
@@ -158,9 +177,39 @@ export default function Drafts({ players, toggleState, setErrors }) {
 
   useEffect(() => {
     try {
-      const output = func(players)
+      const output = matchmaking(players)
       localStorage.setItem('players', JSON.stringify(players))
-      setDrafts(output)
+      let teamDiff = []
+      let laneDiff = []
+      let totalMMR = []
+      let onRole = []
+      output.forEach((x) => {
+        teamDiff.push(x.metadata.delta)
+        laneDiff.push(x.metadata.laneDelta)
+        totalMMR.push(x.metadata.skillLevel)
+        onRole.push(x.metadata.roleScore)
+      })
+      const teamDiffSet = [...new Set(teamDiff)].sort((a, b) => a - b)
+      const laneDiffSet = [...new Set(laneDiff)].sort((a, b) => a - b)
+      const totalMMRSet = [...new Set(totalMMR)].sort((a, b) => b - a)
+      const onRoleSet = [...new Set(onRole)].sort((a, b) => b - a)
+      setDrafts(
+        output.map((x) => {
+          return {
+            ...x,
+            rank: {
+              teamDiff: teamDiffSet.indexOf(x.metadata.delta) + 1,
+              laneDiff: laneDiffSet.indexOf(x.metadata.laneDelta) + 1,
+              role: Math.floor(
+                (totalMMRSet.indexOf(x.metadata.skillLevel) +
+                  onRoleSet.indexOf(x.metadata.roleScore) +
+                  2) /
+                  2
+              ),
+            },
+          }
+        })
+      )
       setIndex(0)
       setProcessing(false)
     } catch (e) {
@@ -192,11 +241,42 @@ export default function Drafts({ players, toggleState, setErrors }) {
   return (
     <div>
       <Draft lobby={drafts[index]} />
-      <div className="flex justify-start flex-wrap m-4 p-2 lg:mx-12">
+      <div className="flex justify-center flex-col items-center m-6 p-2 text-gray-600">
+        <div className="text-gray-700 font-semibold uppercase">Metadata</div>
+        <div className="ml-1">
+          Team MMR Δ:{' '}
+          <span className="font-semibold text-gray-700">
+            {drafts[index].metadata.delta}
+          </span>{' '}
+          (Rank:{' '}
+          <span className="font-semibold text-gray-700">
+            {getOrdinalSuffix(drafts[index].rank.teamDiff)}
+          </span>
+          )
+        </div>
+        <div className="ml-1">
+          Avg Lane MMR Δ:{' '}
+          <span className="font-semibold text-gray-700">
+            {Math.floor(drafts[index].metadata.laneDelta / 5)}
+          </span>{' '}
+          (Rank:{' '}
+          <span className="font-semibold text-gray-700">
+            {getOrdinalSuffix(drafts[index].rank.laneDiff)}
+          </span>
+          )
+        </div>
+        <div className="ml-1">
+          Role Preference Score:{' '}
+          <span className="font-semibold text-gray-700">
+            {getOrdinalSuffix(drafts[index].rank.role)}
+          </span>
+        </div>
+      </div>
+      <div className="flex justify-center flex-wrap m-4 p-2 lg:mx-12">
         <button
           onClick={() => changeIndex(-1)}
           disabled={index === 0}
-          className="btn w-32"
+          className="btn w-28"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -214,13 +294,13 @@ export default function Drafts({ players, toggleState, setErrors }) {
           </svg>
           Previous
         </button>
-        <div className="bg-gray-100 text-gray-600 rounded-full p-2 m-2">
+        <div className="bg-gray-100 text-gray-600 rounded-full p-2 m-2 mx-0">
           {index + 1} / {drafts.length}
         </div>
         <button
           onClick={() => changeIndex(1)}
           disabled={index + 1 === drafts.length}
-          className="btn w-32"
+          className="btn w-28"
         >
           Next
           <svg
@@ -238,7 +318,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
             />
           </svg>
         </button>
-        <button onClick={copy} className="btn w-28">
+        <button onClick={copy} className="btn w-56">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 mr-2"
@@ -253,10 +333,10 @@ export default function Drafts({ players, toggleState, setErrors }) {
               d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
             />
           </svg>
-          Copy
+          Copy Current Lobby
         </button>
-        <button onClick={() => toggleState()} className="btn w-24">
-          Back
+        <button onClick={() => toggleState()} className="btn w-56">
+          Return to Player Selection
         </button>
       </div>
     </div>
