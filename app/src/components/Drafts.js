@@ -66,7 +66,6 @@ function getOrdinalSuffix(i) {
 }
 
 const RoleScore = ({rank}) => {
-  console.log(rank)
   if (rank === 1) {
     return (
       <span className="text-emerald-500 uppercase">Great</span>
@@ -141,13 +140,13 @@ function Draft({ lobby }) {
     <div className="p-2 m-2 lg:mx-12">
       <div className="flex justify-between mb-4 p-2 border-b border-gray">
         <p className="bg-gradient-to-r from-blue-300 p-4 rounded-l-lg uppercase font-semibold text-2xl mx-auto md:block flex flex-col">
-          Blue Team{' '}
+          Blue Team
           <span className="text-gray-500 mx-auto md:text-lg text-sm">
             (Total MMR: <span className="text-gray-600">{lobby.blue.mmr}</span>)
           </span>
         </p>
-        <p className="bg-gradient-to-r from-rose-300 p-4 rounded-l-lg uppercase font-semibold text-2xl mx-auto md:block flex flex-col">
-          Red Team{' '}
+        <p className="bg-gradient-to-l from-rose-300 p-4 rounded-r-lg uppercase font-semibold text-2xl mx-auto md:flex-row-reverse text-right flex flex-col">
+          Red Team
           <span className="text-gray-500 mx-auto md:text-lg text-sm">
             (Total MMR: <span className="text-gray-600">{lobby.red.mmr}</span>)
           </span>
