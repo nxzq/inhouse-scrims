@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lol-inhouse/static/css/main.63f3d7c4.css",
-    "main.js": "/lol-inhouse/static/js/main.cf2c5df8.js",
+    "main.css": "/lol-inhouse/static/css/main.97afab58.css",
+    "main.js": "/lol-inhouse/static/js/main.6e496544.js",
     "static/js/787.083afb34.chunk.js": "/lol-inhouse/static/js/787.083afb34.chunk.js",
     "index.html": "/lol-inhouse/index.html",
-    "main.63f3d7c4.css.map": "/lol-inhouse/static/css/main.63f3d7c4.css.map",
-    "main.cf2c5df8.js.map": "/lol-inhouse/static/js/main.cf2c5df8.js.map",
+    "main.97afab58.css.map": "/lol-inhouse/static/css/main.97afab58.css.map",
+    "main.6e496544.js.map": "/lol-inhouse/static/js/main.6e496544.js.map",
     "787.083afb34.chunk.js.map": "/lol-inhouse/static/js/787.083afb34.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63f3d7c4.css",
-    "static/js/main.cf2c5df8.js"
+    "static/css/main.97afab58.css",
+    "static/js/main.6e496544.js"
   ]
 }
