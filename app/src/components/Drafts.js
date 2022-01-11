@@ -1,6 +1,10 @@
 import matchmaking from 'lol-inhouse'
 import { useState, useEffect } from 'react'
 
+import 'react-tippy/dist/tippy.css';
+import { Tooltip } from 'react-tippy';
+
+
 import top from '../img/roles/TOP.png'
 import jug from '../img/roles/JUNGLE.png'
 import mid from '../img/roles/MIDDLE.png'
@@ -182,6 +186,7 @@ function Draft({ lobby }) {
 
 export default function Drafts({ players, toggleState, setErrors }) {
   const [drafts, setDrafts] = useState(null)
+  const [copied, setCopied] = useState(false)
   const [index, setIndex] = useState(null)
   const [processing, setProcessing] = useState(true)
 
@@ -234,11 +239,14 @@ export default function Drafts({ players, toggleState, setErrors }) {
 
   const copy = async () => {
     const text = copyOutput(drafts[index])
-    if ('clipboard' in navigator) {
+    setCopied(true)
+    setTimeout( () => {
+      setCopied(false)
+    }, 3000)
+    if ('clipboard' in navigator)
       return await navigator.clipboard.writeText(text)
-    } else {
+    else 
       return document.execCommand('copy', true, text)
-    }
   }
 
   if (processing)
@@ -328,6 +336,11 @@ export default function Drafts({ players, toggleState, setErrors }) {
             />
           </svg>
         </button>
+        <Tooltip
+  title="lobby copied to clipboard"
+  position="top"
+  open={copied}
+>
         <button onClick={copy} className="btn w-56">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -345,6 +358,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
           </svg>
           Copy Current Lobby
         </button>
+        </Tooltip>
         <button onClick={() => toggleState()} className="btn w-56">
           Return to Player Selection
         </button>
