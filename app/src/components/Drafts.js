@@ -241,7 +241,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
     setCopied(true)
     setTimeout(() => {
       setCopied(false)
-    }, 3000)
+    }, 2000)
     if ('clipboard' in navigator)
       return await navigator.clipboard.writeText(text)
     else return document.execCommand('copy', true, text)
