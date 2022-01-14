@@ -1,6 +1,9 @@
 import matchmaking from 'lol-inhouse'
 import { useState, useEffect } from 'react'
 
+import 'react-tippy/dist/tippy.css'
+import { Tooltip } from 'react-tippy'
+
 import top from '../img/roles/TOP.png'
 import jug from '../img/roles/JUNGLE.png'
 import mid from '../img/roles/MIDDLE.png'
@@ -182,6 +185,7 @@ function Draft({ lobby }) {
 
 export default function Drafts({ players, toggleState, setErrors }) {
   const [drafts, setDrafts] = useState(null)
+  const [copied, setCopied] = useState(false)
   const [index, setIndex] = useState(null)
   const [processing, setProcessing] = useState(true)
 
@@ -234,11 +238,13 @@ export default function Drafts({ players, toggleState, setErrors }) {
 
   const copy = async () => {
     const text = copyOutput(drafts[index])
-    if ('clipboard' in navigator) {
+    setCopied(true)
+    setTimeout(() => {
+      setCopied(false)
+    }, 2000)
+    if ('clipboard' in navigator)
       return await navigator.clipboard.writeText(text)
-    } else {
-      return document.execCommand('copy', true, text)
-    }
+    else return document.execCommand('copy', true, text)
   }
 
   if (processing)
@@ -328,23 +334,25 @@ export default function Drafts({ players, toggleState, setErrors }) {
             />
           </svg>
         </button>
-        <button onClick={copy} className="btn w-56">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-            />
-          </svg>
-          Copy Current Lobby
-        </button>
+        <Tooltip title="lobby copied to clipboard" position="top" open={copied}>
+          <button onClick={copy} className="btn w-56">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+            Copy Current Lobby
+          </button>
+        </Tooltip>
         <button onClick={() => toggleState()} className="btn w-56">
           Return to Player Selection
         </button>
