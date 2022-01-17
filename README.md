@@ -1,7 +1,7 @@
 # inhouse-scrims
 
 <p>
-  <a href="https://exclamationpointhuman.github.io/lol-inhouse" alt="GitHub Pages">
+  <a href="https://exclamationpointhuman.github.io/inhouse-scrims" alt="GitHub Pages">
     <img src="https://img.shields.io/badge/pages%20-deployed-%23222222?logo=github&style=flat-square" />
   </a>
 </p>
