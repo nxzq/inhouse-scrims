@@ -42,8 +42,16 @@ module.exports = function(games) {
   const skillLevelThreshold = quantile(options.map(x => x.skillLevel),.5)
   options = filterSkillLevel(options, skillLevelThreshold)
   return options.sort((a,b) => {
-    if (a.delta - b.delta === 0)
-      return b.skillLevel - a.skillLevel
+    if (a.delta - b.delta === 0) {
+      if (a.laneDelta - b.laneDelta === 0) {
+        if (b.roleScore - a.roleScore === 0)
+          return b.skillLevel - a.skillLevel 
+        else
+          return b.roleScore - a.roleScore
+      }
+      else
+        return a.laneDelta - b.laneDelta 
+    }
     return a.delta - b.delta
   })
 }
