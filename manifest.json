@@ -1,5 +1,5 @@
 {
-  "short_name": "lol-inhouse",
+  "short_name": "inhouse-scrims",
   "name": "Matchmaking for League of Legend inhouse scrims. Algorithm accounts for elo and role preference.",
   "icons": [
     {
