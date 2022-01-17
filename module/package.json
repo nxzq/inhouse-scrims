@@ -1,5 +1,5 @@
 {
-  "name": "lol-inhouse",
+  "name": "inhouse-scrims",
   "version": "1.0.0",
   "description": "description ...   Team MMR Δ   Average Lane MMR Δ (Lane Diff)   Role Preference",
   "main": "src/index.js",

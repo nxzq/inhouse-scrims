@@ -1,10 +1,10 @@
-# lol-inhouse
+# inhouse-scrims
 
 League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. 
 
 ## Usage
 
-lol-inhouse exports a default function that takes in an array of player objects, validates the input then returns an array of top 25th percentile games sorted from most to least recommended.
+inhouse-scrims exports a default function that takes in an array of player objects, validates the input then returns an array of top 25th percentile games sorted from most to least recommended.
 
 ## Inputs
 

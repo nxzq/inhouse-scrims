@@ -1,6 +1,6 @@
-# lol-inhouse-app
+# inhouse-scrims-app
 
-Web (React app) interface for lol-inhouse.
+Web (React app) interface for inhouse-scrims.
 
 ## Getting Started
 

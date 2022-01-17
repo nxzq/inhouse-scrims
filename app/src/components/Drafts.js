@@ -1,4 +1,4 @@
-import matchmaking from 'lol-inhouse'
+import matchmaking from 'inhouse-scrims'
 import { useState, useEffect } from 'react'
 
 import top from '../img/roles/TOP.png'
