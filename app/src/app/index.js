@@ -6,63 +6,78 @@ import Footer from '../components/Footer'
 
 import layout from './layout.module.css'
 
+const defaultPlayers = [
+  {
+    name: 'LettuceDog',
+    elo: 'diamond',
+    roles: [],
+  },
+  {
+    name: 'CrissCross',
+    elo: 'platinum',
+    roles: ['bot', 'top'],
+  },
+  {
+    name: 'Game0ver',
+    elo: 'silver',
+    roles: ['jug', 'sup'],
+  },
+  {
+    name: 'dude go long',
+    elo: 'platinum',
+    roles: ['jug', 'mid'],
+  },
+  {
+    name: 'barracuda',
+    elo: 'gold',
+    roles: ['bot', 'jug'],
+  },
+  {
+    name: 'Hypr',
+    elo: 'master',
+    roles: ['mid'],
+  },
+  {
+    name: 'you sweat in casual',
+    elo: 'platinum',
+    roles: ['top', 'jug'],
+  },
+  {
+    name: 'I AM REX RYAN',
+    elo: 'silver',
+    roles: ['top', 'sup'],
+  },
+  {
+    name: 'Bob Ross Ate My Son',
+    elo: 'gold',
+    roles: ['sup'],
+  },
+  {
+    name: 'AOL Account',
+    elo: 'gold',
+    roles: [],
+  },
+]
+
+const getPlayers = () => {
+  const value = localStorage.getItem('players')
+  if (value) {
+    try {
+      const players = JSON.parse(value)
+      return players
+    } catch (error) {
+      localStorage.removeItem('players')
+      return defaultPlayers
+    }
+  } else {
+    return defaultPlayers
+  }
+}
+
 export default function App() {
   const [errors, setErrors] = useState(null)
   const [appState, setAppState] = useState('input')
-  const [players, setPlayers] = useState(
-    JSON.parse(localStorage.getItem('players')) || [
-      {
-        name: 'LettuceDog',
-        elo: 'diamond',
-        roles: [],
-      },
-      {
-        name: 'CrissCross',
-        elo: 'platinum',
-        roles: ['bot', 'top'],
-      },
-      {
-        name: 'Game0ver',
-        elo: 'silver',
-        roles: ['jug', 'sup'],
-      },
-      {
-        name: 'dude go long',
-        elo: 'platinum',
-        roles: ['jug', 'mid'],
-      },
-      {
-        name: 'barracuda',
-        elo: 'gold',
-        roles: ['bot', 'jug'],
-      },
-      {
-        name: 'Hypr',
-        elo: 'master',
-        roles: ['mid'],
-      },
-      {
-        name: 'you sweat in casual',
-        elo: 'platinum',
-        roles: ['top', 'jug'],
-      },
-      {
-        name: 'I AM REX RYAN',
-        elo: 'silver',
-        roles: ['top', 'sup'],
-      },
-      {
-        name: 'Bob Ross Ate My Son',
-        elo: 'gold',
-        roles: ['sup'],
-      },
-      {
-        name: 'AOL Account',
-        elo: 'gold',
-        roles: [],
-      },
-    ]
-  )
+  const [players, setPlayers] = useState(getPlayers())
 
   const toggleState = () => {
     if (appState === 'input') setAppState('drafts')
