@@ -1,6 +1,6 @@
 # inhouse-scrims
 
-League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. 
+League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted.
 
 ## Usage
 
@@ -9,12 +9,13 @@ inhouse-scrims exports a default function that takes in an array of player objec
 ## Inputs
 
 An array length 10 of player objects
+
 ```json
-    {
-      "name": "any string",
-      "elo": "see allowed elo values",
-      "roles": ["see allowed roles values"]
-    }
+{
+  "name": "any string",
+  "elo": "see allowed elo values",
+  "roles": ["see allowed roles values"]
+}
 ```
 
 ### Allowed ELO Values
@@ -31,10 +32,10 @@ Roles is an array of a players role preference. An empty array is the same a que
 
 #### Examples
 
-JUG primary role SUP secondary sole 
+JUG primary role SUP secondary sole
 `"roles": ["jug", "sup"]`
 
-Fill Player 
+Fill Player
 `"roles": []`
 
 MID primary role no secondary role
@@ -43,28 +44,33 @@ MID primary role no secondary role
 ### Example Inputs
 
 Platinum IV BOT main TOP secondary Player
+
 ```json
-    {
-      "name": "summoner 4",
-      "elo": "platinum4",
-      "roles": ["bot", "top"]
-    }
+{
+  "name": "summoner 4",
+  "elo": "platinum4",
+  "roles": ["bot", "top"]
+}
 ```
+
 Diamond I Fill Player
+
 ```json
-    {
-      "name": "summoner 9",
-      "elo": "diamond1",
-      "roles": []
-    }
+{
+  "name": "summoner 9",
+  "elo": "diamond1",
+  "roles": []
+}
 ```
+
 Gold III Support Player
+
 ```json
-    {
-      "name": "summoner 10",
-      "elo": "gold3",
-      "roles": ["sup"]
-    }
+{
+  "name": "summoner 10",
+  "elo": "gold3",
+  "roles": ["sup"]
+}
 ```
 
 ## Output
@@ -120,10 +126,10 @@ Team object includes a team MMR value as well as a roster object that has keys f
 
 Includes data about the lobby
 
-* `skillLevel` -> total MMR of entire lobby
-* `delta` -> total MMR difference between the two teams
-* `laneDelta` -> MMR difference between each role between two teams (calculated as the sum of the absolute value of all role differences)
-* `roleScore` -> role preference score, 2 points are awarded for players in primary roles, 1 point for secondary
+- `skillLevel` -> total MMR of entire lobby
+- `delta` -> total MMR difference between the two teams
+- `laneDelta` -> MMR difference between each role between two teams (calculated as the sum of the absolute value of all role differences)
+- `roleScore` -> role preference score, 2 points are awarded for players in primary roles, 1 point for secondary
 
 ```json
     "metadata": {
