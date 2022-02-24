@@ -7,21 +7,21 @@ module.exports = {
     path: path.join(__dirname, './dist'),
     filename: 'index.js',
     libraryTarget: 'commonjs2',
-    publicPath: '/dist/'
+    publicPath: '/dist/',
   },
   optimization: {
-    usedExports: true
+    usedExports: true,
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
         include: path.join(__dirname, 'src'),
-        exclude: /node_modules/
-      }
-    ]
-  }
+        exclude: /node_modules/,
+      },
+    ],
+  },
 }
