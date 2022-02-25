@@ -136,13 +136,13 @@ function Draft({ lobby }) {
   return (
     <div className="p-2 m-2 lg:mx-12">
       <div className="flex justify-between mb-4 p-2 border-b border-slate-500">
-        <p className="bg-gradient-to-r from-blue-300 p-4 rounded-l-lg uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 md:block flex flex-col">
+        <p className="bg-gradient-to-r from-blue-300 p-4 rounded-l-lg w-full uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 md:block flex flex-col">
           Blue Team
           <span className="text-zinc-900 mt-auto mx-2 md:text-lg text-sm">
             (Total MMR: <span className="text-zinc-800">{lobby.blue.mmr}</span>)
           </span>
         </p>
-        <p className="bg-gradient-to-l from-rose-300 p-4 rounded-r-lg uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 ml-auto md:flex-row-reverse text-right flex flex-col">
+        <p className="bg-gradient-to-l from-rose-300 p-4 rounded-r-lg w-full uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 ml-auto md:flex-row-reverse text-right flex flex-col">
           Red Team
           <span className="text-zinc-900 mt-auto mx-2 md:text-lg text-sm">
             (Total MMR: <span className="text-zinc-800">{lobby.red.mmr}</span>)
