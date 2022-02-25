@@ -3,16 +3,13 @@ import SelectRole from '../components/SelectRole'
 
 export default function SummonerInput({ summoner, i, handleChange }) {
   return (
-    <div className="relative max-w-6xl m-2 py-2 px-4 bg-gray-50 shadow-md rounded-lg">
-      <div className="absolute top-0 right-0 bg-gray-100 text-gray-600 rounded-full p-2 mr-4 mt-1">
-        Player {i + 1}
-      </div>
+    <div className="relative max-w-6xl m-2 py-1 px-2 bg-slate-700 rounded-sm">
       <div className="md:flex">
         <div className="m-2 p-2 w-64">
           <div>
             <label
               id="listbox-label"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-slate-300"
             >
               Name
             </label>
@@ -22,7 +19,7 @@ export default function SummonerInput({ summoner, i, handleChange }) {
                 value={summoner.name}
                 name="name"
                 onChange={(e) => handleChange(e, i)}
-                className="relative w-full h-14 bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+                className="relative w-full h-14 text-slate-300 bg-slate-800 border border-slate-800 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 sm:text-sm"
               />
             </div>
           </div>

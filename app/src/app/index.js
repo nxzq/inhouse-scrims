@@ -120,7 +120,7 @@ export default function App() {
               </div>
             )}
             <form onSubmit={handleSubmit}>
-              <div className="lg:grid lg:grid-cols-2 m-2">
+              <div className="lg:grid lg:grid-cols-2 m-1">
                 {players.map((player, i) => (
                   <Input
                     summoner={player}
