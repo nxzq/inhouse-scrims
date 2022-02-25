@@ -23,8 +23,8 @@ const Option = ({ option, selected, select, handleTab, close }) => {
       <li
         className={clsx(
           'cursor-default select-none relative py-2 pl-3 pr-9',
-          hovered && 'text-white bg-gray-600',
-          !hovered && 'text-gray-900'
+          hovered && 'text-slate-300 bg-slate-700',
+          !hovered && 'text-slate-300 bg-slate-800'
         )}
         id={`role-option-${option.name}`}
         tabIndex="0"
@@ -57,8 +57,8 @@ const Option = ({ option, selected, select, handleTab, close }) => {
         <span
           className={clsx(
             'absolute inset-y-0 right-0 flex items-center pr-4',
-            hovered && 'text-white bg-gray-600',
-            !hovered && 'text-gray-600'
+            hovered && 'text-slate-300 bg-slate-700',
+            !hovered && 'text-slate-300 bg-slate-800'
           )}
         >
           <svg
@@ -83,8 +83,8 @@ const Option = ({ option, selected, select, handleTab, close }) => {
     <li
       className={
         hovered
-          ? 'text-white bg-gray-600 cursor-default select-none relative py-2 pl-3 pr-9'
-          : 'text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9'
+          ? 'text-slate-300 bg-slate-700 cursor-default select-none relative py-2 pl-3 pr-9'
+          : 'text-slate-300 bg-slate-800 cursor-default select-none relative py-2 pl-3 pr-9'
       }
       id={`role-option-${option.name}`}
       tabIndex="0"
@@ -152,7 +152,7 @@ const Select = ({ options, selected, select, setOpen, open, position }) => {
         onClick={() => setOpen(!open)}
         onKeyDown={(e) => handleTabOut(e, open, setOpen)}
         type="button"
-        className="relative w-full h-14 bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-gray-600 focus:border-gray-600 sm:text-sm"
+        className="relative w-full h-14 bg-slate-800 text-slate-300 border border-slate-800 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 sm:text-sm"
         aria-haspopup="listbox"
         aria-expanded="true"
         aria-labelledby="listbox-label"
@@ -187,7 +187,7 @@ const Select = ({ options, selected, select, setOpen, open, position }) => {
         </span>
         <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <svg
-            className="h-5 w-5 text-gray-600"
+            className="h-5 w-5 text-gray-500"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -203,7 +203,7 @@ const Select = ({ options, selected, select, setOpen, open, position }) => {
       </button>
       <ul
         className={clsx(
-          'absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm',
+          'absolute z-10 mt-1 w-full bg-slate-800 border border-slate-500 max-h-56 rounded-md py-1 text-base ring-1 ring-slate-500 overflow-auto focus:outline-none sm:text-sm',
           open && 'block',
           !open && 'hidden'
         )}
@@ -284,7 +284,7 @@ export default function SelectRole({ roles, i, handleChange }) {
     <div>
       <label
         id="listbox-label"
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-slate-300"
       >
         Roles
       </label>
