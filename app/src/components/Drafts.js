@@ -93,12 +93,12 @@ const RoleRow = ({ blue, red, src, alt }) => {
 
   return (
     <div className="grid grid-cols-5 md:m-4 lg:mx-20">
-      <div className="col-span-2 bg-gradient-to-r from-slate-700 rounded-l-sm">
+      <div className="col-span-2 bg-gradient-to-r from-slate-700 rounded-l-sm md:rounded-l-full">
         <span className="flex items-center">
           <img
             src={ranks[blue.elo]}
             alt=""
-            className="flex-shrink-0 d:h-10 md:w-10 md:block hidden rounded-full"
+            className="flex-shrink-0 lg:h-12 lg:w-12 md:h-10 md:w-10 md:block hidden rounded-full"
           />
           <div className="flex flex-col ml-2 items-start">
             <span className="block text-slate-300 line-clamp-1 break-all text-lg md:text-2xl">
@@ -111,7 +111,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
         </span>
       </div>
       <img className="md:h-10 h-8 col-span-1 m-auto" src={src} alt={alt} />
-      <div className="col-span-2 w-full bg-gradient-to-l from-slate-700 rounded-r-sm">
+      <div className="col-span-2 w-full bg-gradient-to-l from-slate-700 rounded-r-sm md:rounded-r-full">
         <span className="flex justify-end items-center">
           <div className="flex flex-col mr-2 items-end">
             <span className="block text-slate-300 line-clamp-1 break-all text-lg md:text-2xl">
@@ -124,7 +124,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
           <img
             src={ranks[red.elo]}
             alt=""
-            className="flex-shrink-0 md:h-10 md:w-10 md:block hidden rounded-full"
+            className="flex-shrink-0 lg:h-12 lg:w-12 md:h-10 md:w-10 md:block hidden rounded-full"
           />
         </span>
       </div>
