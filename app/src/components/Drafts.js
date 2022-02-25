@@ -93,7 +93,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
 
   return (
     <div className="grid grid-cols-5 md:m-4 lg:mx-20">
-      <div className="col-span-2 bg-gradient-to-r from-slate-700 rounded-l-lg">
+      <div className="col-span-2 bg-gradient-to-r from-slate-700 rounded-l-sm">
         <span className="flex items-center">
           <img
             src={ranks[blue.elo]}
@@ -111,7 +111,7 @@ const RoleRow = ({ blue, red, src, alt }) => {
         </span>
       </div>
       <img className="md:h-10 h-8 col-span-1 m-auto" src={src} alt={alt} />
-      <div className="col-span-2 w-full bg-gradient-to-l from-slate-700 rounded-r-lg">
+      <div className="col-span-2 w-full bg-gradient-to-l from-slate-700 rounded-r-sm">
         <span className="flex justify-end items-center">
           <div className="flex flex-col mr-2 items-end">
             <span className="block text-slate-300 line-clamp-1 break-all text-lg md:text-2xl">
@@ -136,13 +136,13 @@ function Draft({ lobby }) {
   return (
     <div className="p-2 m-2 lg:mx-12">
       <div className="flex justify-between mb-4 p-2 border-b border-slate-500">
-        <p className="bg-gradient-to-r from-blue-300 p-4 rounded-l-lg w-full uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 md:block flex flex-col">
+        <p className="bg-gradient-to-r from-blue-300 p-4 rounded-l-sm w-full uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 md:block flex flex-col">
           Blue Team
           <span className="text-zinc-900 mt-auto mx-2 md:text-lg text-sm">
             (Total MMR: <span className="text-zinc-800">{lobby.blue.mmr}</span>)
           </span>
         </p>
-        <p className="bg-gradient-to-l from-rose-300 p-4 rounded-r-lg w-full uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 ml-auto md:flex-row-reverse text-right flex flex-col">
+        <p className="bg-gradient-to-l from-rose-300 p-4 rounded-r-sm w-full uppercase font-semibold text-2xl my-auto md:m-2 lg:mx-16 xl:mx-20 ml-auto md:flex-row-reverse text-right flex flex-col">
           Red Team
           <span className="text-zinc-900 mt-auto mx-2 md:text-lg text-sm">
             (Total MMR: <span className="text-zinc-800">{lobby.red.mmr}</span>)
