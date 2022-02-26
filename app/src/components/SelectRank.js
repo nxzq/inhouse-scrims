@@ -151,7 +151,7 @@ export default function SelectRank({ elo, i, handleChange }) {
           onClick={() => setOpen(!open)}
           onKeyDown={(e) => handleTabOut(e, open, setOpen)}
           type="button"
-          className="relative w-full h-14 bg-slate-800 border border-slate-800 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 sm:text-sm"
+          className="relative w-full min-w-fit h-14 bg-slate-800 border border-slate-800 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 sm:text-sm"
           aria-haspopup="listbox"
           aria-expanded="true"
           aria-labelledby="listbox-label"
@@ -184,7 +184,7 @@ export default function SelectRank({ elo, i, handleChange }) {
         </button>
         <ul
           className={clsx(
-            'absolute z-10 mt-1 w-full bg-slate-800 border border-slate-500 max-h-56 rounded-md py-1 text-base ring-1 ring-slate-500 overflow-auto focus:outline-none sm:text-sm',
+            'absolute z-10 mt-1 w-full min-w-fit bg-slate-800 border border-slate-500 max-h-56 rounded-md py-1 text-base ring-1 ring-slate-500 overflow-auto focus:outline-none sm:text-sm',
             open && 'block',
             !open && 'hidden'
           )}
