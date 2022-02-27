@@ -4,7 +4,6 @@ import Input from '../components/Input'
 import Drafts from '../components/Drafts'
 import Footer from '../components/Footer'
 
-import githubIcon from '../img/github.svg'
 import layout from './layout.module.css'
 
 const defaultPlayers = [
@@ -112,17 +111,6 @@ export default function App() {
       <div className={layout.viewContent}>
         {appState === 'input' ? (
           <>
-            <div className="flex flex-wrap w-full justify-center p-2">
-              <p className="text-slate-300 text-center mx-2">
-                open source league of legends inhouse scrims matchmaking
-              </p>
-              <a href="https://github.com/exclamationpointhuman/inhouse-scrims/tree/main/module">
-                <p className="text-slate-400 hover:text-slate-500 hover:underline mx-2 flex items-center justify-center">
-                  <img src={githubIcon} alt="" className="w-5 h-5" />
-                  &nbsp;view algorithm here
-                </p>
-              </a>
-            </div>
             {errors && (
               <div className="ml-2">
                 <span className="text-rose-700 font-semibold uppercase">
@@ -131,6 +119,9 @@ export default function App() {
                 <pre>{errors}</pre>
               </div>
             )}
+            <p className="text-slate-400 uppercase m-2 text-center">
+              Player Pool
+            </p>
             <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap justify-center justify-items-center m-1">
                 {players.map((player, i) => (
