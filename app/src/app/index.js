@@ -113,11 +113,11 @@ export default function App() {
         {appState === 'input' ? (
           <>
             <div className="flex flex-wrap w-full justify-center p-2">
-              <p className="text-slate-300 mx-2">
+              <p className="text-slate-300 text-center mx-2">
                 open source league of legends inhouse scrims matchmaking
               </p>
               <a href="https://github.com/exclamationpointhuman/inhouse-scrims/tree/main/module">
-                <p className="text-slate-400 hover:text-slate-500 hover:underline mx-2 flex">
+                <p className="text-slate-400 hover:text-slate-500 hover:underline mx-2 flex items-center justify-center">
                   <img src={githubIcon} alt="" className="w-5 h-5" />
                   &nbsp;view algorithm here
                 </p>
