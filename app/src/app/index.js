@@ -141,7 +141,7 @@ export default function App() {
                   <pre>{errors}</pre>
                 </div>
               )}
-              <div className="flex p-2 m-2">
+              <div className="flex justify-center p-2 m-2">
                 <input
                   type="submit"
                   value="Generate Inhouse Lobbies"
