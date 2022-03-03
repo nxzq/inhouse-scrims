@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/inhouse-scrims/static/css/main.0a603eda.css",
-    "main.js": "/inhouse-scrims/static/js/main.75d54e52.js",
+    "main.css": "/inhouse-scrims/static/css/main.e0d1619e.css",
+    "main.js": "/inhouse-scrims/static/js/main.d828e57c.js",
     "static/js/787.1df2c07a.chunk.js": "/inhouse-scrims/static/js/787.1df2c07a.chunk.js",
     "static/media/opensourceinitiative.svg": "/inhouse-scrims/static/media/opensourceinitiative.5abbe6dd25b140ed2e64817af9c7f19f.svg",
     "index.html": "/inhouse-scrims/index.html",
     "static/media/github.svg": "/inhouse-scrims/static/media/github.3439d49f828ba21007bafcdf5a8d557b.svg",
-    "main.0a603eda.css.map": "/inhouse-scrims/static/css/main.0a603eda.css.map",
-    "main.75d54e52.js.map": "/inhouse-scrims/static/js/main.75d54e52.js.map",
+    "main.e0d1619e.css.map": "/inhouse-scrims/static/css/main.e0d1619e.css.map",
+    "main.d828e57c.js.map": "/inhouse-scrims/static/js/main.d828e57c.js.map",
     "787.1df2c07a.chunk.js.map": "/inhouse-scrims/static/js/787.1df2c07a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0a603eda.css",
-    "static/js/main.75d54e52.js"
+    "static/css/main.e0d1619e.css",
+    "static/js/main.d828e57c.js"
   ]
 }
