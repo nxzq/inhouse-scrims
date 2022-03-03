@@ -15,8 +15,7 @@
     {
       "src": "bot.svg",
       "type": "image/svg",
-      "sizes": "144x144",
-      "purpose": "any maskable"
+      "sizes": "144x144"
     }
   ],
   "start_url": ".",
