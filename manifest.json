@@ -10,7 +10,12 @@
     {
       "src": "bot.png",
       "type": "image/png",
-      "sizes": "96x96",
+      "sizes": "96x96"
+    },
+    {
+      "src": "bot.svg",
+      "type": "image/svg",
+      "sizes": "144x144",
       "purpose": "any maskable"
     }
   ],
