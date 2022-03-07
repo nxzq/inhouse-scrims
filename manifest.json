@@ -1,6 +1,6 @@
 {
-  "short_name": "inhouse-scrims",
-  "name": "Matchmaking for League of Legend inhouse scrims. Algorithm accounts for elo and role preference.",
+  "short_name": "inhouse scrims",
+  "name": "Open-Source League of Legends inhouse scrims matchmaking. Algorithm accounts for elo and role preference.",
   "icons": [
     {
       "src": "favicon.ico",
