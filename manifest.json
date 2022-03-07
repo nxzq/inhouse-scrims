@@ -1,5 +1,5 @@
 {
-  "short_name": "inhouse scrims",
+  "short_name": "inhouse scrim generator",
   "name": "Open-Source League of Legends inhouse scrims matchmaking. Algorithm accounts for elo and role preference.",
   "icons": [
     {
