@@ -344,8 +344,7 @@ function matchmaking(
         roleScore: team2Order.roleScore,
       },
     }
-  })
-  console.log('RoleScored.length: ', RoleScored.length)
+  }) 
   const output = RoleScored.map((x) => prettyOutput(x, input))
   return output
     .sort((a, b) => {
