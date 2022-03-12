@@ -213,17 +213,16 @@ export default function Drafts({ players, toggleState, setErrors }) {
       let teamDiff = []
       let laneDiff = []
       let totalMMR = []
-      let onRole = []
+      let roleScore = []
       output.forEach((x) => {
         teamDiff.push(x.metadata.delta)
         laneDiff.push(x.metadata.laneDelta)
         totalMMR.push(x.metadata.skillLevel)
-        onRole.push(x.metadata.roleScore)
+        roleScore.push(x.metadata.roleScore)
       })
       const teamDiffSet = [...new Set(teamDiff)].sort((a, b) => a - b)
       const laneDiffSet = [...new Set(laneDiff)].sort((a, b) => a - b)
-      const totalMMRSet = [...new Set(totalMMR)].sort((a, b) => b - a)
-      const onRoleSet = [...new Set(onRole)].sort((a, b) => b - a)
+      const roleScoreSet = [...new Set(roleScore)].sort((a, b) => b - a)
       setDrafts(
         output.map((x) => {
           return {
@@ -231,12 +230,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
             rank: {
               teamDiff: teamDiffSet.indexOf(x.metadata.delta) + 1,
               laneDiff: laneDiffSet.indexOf(x.metadata.laneDelta) + 1,
-              role: Math.floor(
-                (totalMMRSet.indexOf(x.metadata.skillLevel) +
-                  onRoleSet.indexOf(x.metadata.roleScore) +
-                  2) /
-                  2
-              ),
+              role: roleScoreSet.indexOf(x.metadata.roleScore) + 1
             },
           }
         })
