@@ -6,10 +6,6 @@
   </a>
 </p>
 
-<a href="https://opensource.org/">
-  <img src="https://raw.githubusercontent.com/exclamationpointhuman/demo/main/opensourceinitiative/opensourceinitiative.png" height="100" align="right" />
-</a>
-
 League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Takes an array of player objects and returns an array of suitable lobbies sorted. Learn more about the [algorithm here](/module/README.md).
 
 ## Example Inputs
