@@ -82,18 +82,10 @@ const permutation = (array: Array<any>): Array<Array<any>> => {
     if (!array.length) {
       result.push(temp)
     }
-    if (array.length === 10) {
-      for (i = 0; i < 5; i++) {
-        x = array.splice(i, 1)[0]
-        p(array, temp.concat(x))
-        array.splice(i, 0, x)
-      }
-    } else {
-      for (i = 0; i < array.length; i++) {
-        x = array.splice(i, 1)[0]
-        p(array, temp.concat(x))
-        array.splice(i, 0, x)
-      }
+    for (i = 0; i < array.length; i++) {
+      x = array.splice(i, 1)[0]
+      p(array, temp.concat(x))
+      array.splice(i, 0, x)
     }
   }
 
@@ -300,6 +292,12 @@ function matchmaking(
   input: Array<{ name: string; elo: string; roles: string[] }>
 ) {
   const fixedIndexArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  /*
+    currently creating duplicate combinations (252)
+    only need (10C5)/2 which is 126
+    causing a downstream cleanup step 
+    see (⚠️)
+  */
   const lobbies = kCombinations(fixedIndexArray, 5)
   const games = lobbies
     .map((l) => {
@@ -344,8 +342,20 @@ function matchmaking(
         roleScore: team2Order.roleScore,
       },
     }
-  }) 
-  const output = RoleScored.map((x) => prettyOutput(x, input))
+  })
+  // ⚠️
+  const noDupe = RoleScored.filter(
+    (value, index, self) =>
+      index ===
+      self.findIndex(
+        (t) =>
+          JSON.stringify(t.team1.players) ===
+            JSON.stringify(value.team2.players) ||
+          JSON.stringify(t.team1.players) ===
+            JSON.stringify(value.team1.players)
+      )
+  )
+  const output = noDupe.map((x) => prettyOutput(x, input))
   return output
     .sort((a, b) => {
       if (b.metadata.roleScore - a.metadata.roleScore === 0)
