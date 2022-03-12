@@ -1,6 +1,6 @@
 const inputSchema = require('./utils/validate')
 
-const MMR:{[key: string]: number}  = Object.freeze({
+const MMR: { [key: string]: number } = Object.freeze({
   iron4: 200,
   iron3: 400,
   iron: 600,
@@ -36,15 +36,9 @@ const MMR:{[key: string]: number}  = Object.freeze({
   challenger: 3250,
 })
 
-const ROLES_BY_INDEX = Object.freeze([
-  'top',
-  'jug',
-  'mid',
-  'bot',
-  'sup'
-])
+const ROLES_BY_INDEX = Object.freeze(['top', 'jug', 'mid', 'bot', 'sup'])
 
-const quantile = (arr:Array<any>, q:number):number => {
+const quantile = (arr: Array<any>, q: number): number => {
   const sorted = arr.sort((a, b) => a - b)
   const pos = (sorted.length - 1) * q
   const base = Math.floor(pos)
@@ -56,34 +50,34 @@ const quantile = (arr:Array<any>, q:number):number => {
   }
 }
 
-function k_combinations(set: Array<any>, k: number): Array<any> {
-	var i, j, combs, head, tailcombs;
-	if (k > set.length || k <= 0) {
-		return [];
-	}
-	if (k == set.length) {
-		return [set];
-	}
-	if (k == 1) {
-		combs = [];
-		for (i = 0; i < set.length; i++) {
-			combs.push([set[i]]);
-		}
-		return combs;
-	}
-	combs = [];
-	for (i = 0; i < set.length - k + 1; i++) {
-		head = set.slice(i, i + 1);
-		tailcombs = k_combinations(set.slice(i + 1), k - 1);
-		for (j = 0; j < tailcombs.length; j++) {
-			combs.push(head.concat(tailcombs[j]));
-		}
-	}
-	return combs;
+function kCombinations(set: Array<any>, k: number): Array<any> {
+  var i, j, combs, head, tailcombs
+  if (k > set.length || k <= 0) {
+    return []
+  }
+  if (k == set.length) {
+    return [set]
+  }
+  if (k == 1) {
+    combs = []
+    for (i = 0; i < set.length; i++) {
+      combs.push([set[i]])
+    }
+    return combs
+  }
+  combs = []
+  for (i = 0; i < set.length - k + 1; i++) {
+    head = set.slice(i, i + 1)
+    tailcombs = kCombinations(set.slice(i + 1), k - 1)
+    for (j = 0; j < tailcombs.length; j++) {
+      combs.push(head.concat(tailcombs[j]))
+    }
+  }
+  return combs
 }
 
-const permutation = (array:Array<any>):Array<Array<any>> => {
-  function p(array:Array<any>, temp:Array<any>) {
+const permutation = (array: Array<any>): Array<Array<any>> => {
+  function p(array: Array<any>, temp: Array<any>) {
     var i, x
     if (!array.length) {
       result.push(temp)
@@ -103,24 +97,28 @@ const permutation = (array:Array<any>):Array<Array<any>> => {
     }
   }
 
-  var result:Array<any> = []
+  var result: Array<any> = []
   p(array, [])
   return result
 }
 
-const getRoleStatusArray = (team:Array<number>, players:Array<{ name: string, elo: string, roles: string[] }>) => {
+const getRoleStatusArray = (
+  team: Array<number>,
+  players: Array<{ name: string; elo: string; roles: string[] }>
+) => {
   return team.map((player, i) => {
     let role = ROLES_BY_INDEX[i]
     let status = 'autofill'
     if (players[player].roles.length === 0) status = 'fill'
     if (players[player].roles[0] === role) status = 'primary'
-    if (players[player].roles[1] && players[player].roles[1] === role) status = 'secondary'
+    if (players[player].roles[1] && players[player].roles[1] === role)
+      status = 'secondary'
     return status
   })
 }
 
 const prettyRank = (elo: string) => {
-  const ranks:{[key: number]: string} = {
+  const ranks: { [key: number]: string } = {
     1: 'i',
     2: 'ii',
     3: 'iii',
@@ -128,36 +126,54 @@ const prettyRank = (elo: string) => {
   }
   const division = elo.match(/\d+$/)
   if (division) {
-    return `${elo.charAt(0).toUpperCase() + elo.slice(1, -1)} ${ranks[Number(division[0])].toUpperCase()}`
+    return `${elo.charAt(0).toUpperCase() + elo.slice(1, -1)} ${ranks[
+      Number(division[0])
+    ].toUpperCase()}`
   } else {
     return elo.charAt(0).toUpperCase() + elo.slice(1)
   }
 }
 
-const getLaneDelta = (team1:Array<number>, team2:Array<number>, players:Array<{ name: string, elo: string, roles: string[] }>):number => {
+const getLaneDelta = (
+  team1: Array<number>,
+  team2: Array<number>,
+  players: Array<{ name: string; elo: string; roles: string[] }>
+): number => {
   let deltas = []
   for (let i = 0; i < 5; i++) {
-    deltas.push(Math.abs(MMR[players[team1[i]].elo] - MMR[players[team2[i]].elo]))
+    deltas.push(
+      Math.abs(MMR[players[team1[i]].elo] - MMR[players[team2[i]].elo])
+    )
   }
   return deltas.reduce((a, b) => a + b)
 }
 
-const prettyOutput = (lobbyData:{roleScore: number;
-  team1: {
-      players: number[];
-      roleScore: number;
-      mmr: number;
-  };
-  team2: {
-      players: number[];
-      roleScore: number;
-      mmr: number;
-  };
-  combo: any[];
-  mmrDelta: number;
-} , players:Array<{ name: string, elo: string, roles: string[]}>) => {
-  const team1RoleBreakdown = getRoleStatusArray(lobbyData.team1.players, players)
-  const team2RoleBreakdown = getRoleStatusArray(lobbyData.team2.players, players)
+const prettyOutput = (
+  lobbyData: {
+    roleScore: number
+    team1: {
+      players: number[]
+      roleScore: number
+      mmr: number
+    }
+    team2: {
+      players: number[]
+      roleScore: number
+      mmr: number
+    }
+    combo: any[]
+    mmrDelta: number
+  },
+  players: Array<{ name: string; elo: string; roles: string[] }>
+) => {
+  const team1RoleBreakdown = getRoleStatusArray(
+    lobbyData.team1.players,
+    players
+  )
+  const team2RoleBreakdown = getRoleStatusArray(
+    lobbyData.team2.players,
+    players
+  )
   const teamA = {
     roster: {
       top: {
@@ -192,7 +208,7 @@ const prettyOutput = (lobbyData:{roleScore: number;
       },
     },
     mmr: lobbyData.team1.mmr,
-    roleScore: lobbyData.team2.roleScore
+    roleScore: lobbyData.team2.roleScore,
   }
   const teamB = {
     roster: {
@@ -228,7 +244,7 @@ const prettyOutput = (lobbyData:{roleScore: number;
       },
     },
     mmr: lobbyData.team2.mmr,
-    roleScore: lobbyData.team2.roleScore
+    roleScore: lobbyData.team2.roleScore,
   }
   const red = teamA.mmr > teamB.mmr ? teamA : teamB
   const blue = teamA.mmr > teamB.mmr ? teamB : teamA
@@ -238,63 +254,80 @@ const prettyOutput = (lobbyData:{roleScore: number;
     metadata: {
       roleScore: lobbyData.roleScore,
       delta: lobbyData.mmrDelta,
-      laneDelta: getLaneDelta(lobbyData.team1.players, lobbyData.team2.players, players),
-      skillLevel: teamA.mmr + teamB.mmr
+      laneDelta: getLaneDelta(
+        lobbyData.team1.players,
+        lobbyData.team2.players,
+        players
+      ),
+      skillLevel: teamA.mmr + teamB.mmr,
     },
   }
 }
 
-const getTeamOrder = (team:Array<number>, players:Array<{ name: string, elo: string, roles: string[] }>):{ order: Array<number>, roleScore: number} => {
+const getTeamOrder = (
+  team: Array<number>,
+  players: Array<{ name: string; elo: string; roles: string[] }>
+): { order: Array<number>; roleScore: number } => {
   const perm = permutation(team)
-  const results = perm.map(x => {
+  const results = perm.map((x) => {
     const rolesBreakdown = getRoleStatusArray(x, players)
     const roleScore = rolesBreakdown
-    .map((x) => {
-      if (x === 'primary') return 2
-      if (x === 'secondary') return 1
-      else return 0
-    })
-    .reduce((a, b) => a + b, 0)
+      .map((x) => {
+        if (x === 'primary') return 2
+        if (x === 'secondary') return 1
+        else return 0
+      })
+      .reduce((a, b) => a + b, 0)
     return {
       order: x,
-      roleScore
+      roleScore,
     }
   })
-  const sorted = results.sort((a,b) => b.roleScore - a.roleScore)
+  const sorted = results.sort((a, b) => b.roleScore - a.roleScore)
   return sorted[0]
 }
 
-const getTeamMMR = (team: Array<number>, players: Array<{ name: string, elo: string, roles: string[] }>):number => {
+const getTeamMMR = (
+  team: Array<number>,
+  players: Array<{ name: string; elo: string; roles: string[] }>
+): number => {
   let x = 0
-  team.map(i => x += MMR[players[i].elo])
+  team.map((i) => (x += MMR[players[i].elo]))
   return x
 }
 
-function matchmaking(input: Array<{ name: string, elo: string, roles: string[] }>) {
+function matchmaking(
+  input: Array<{ name: string; elo: string; roles: string[] }>
+) {
   const fixedIndexArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const lobbies = k_combinations(fixedIndexArray, 5)
-  const games = lobbies.map(l => {
-    const players = Array.from(new Set([...l,...fixedIndexArray]))
-    const team1 = players.slice(0,5)
-    const team1mmr = getTeamMMR(team1, input)
-    const team2 = players.slice(5,10)
-    const team2mmr = getTeamMMR(team2, input)
-    return {
-      combo: players,
-      mmrDelta: Math.abs(team1mmr - team2mmr),
-      team1: {
-        players: team1,
-        mmr: team1mmr
-      },
-      team2: {
-        players: team2,
-        mmr: team2mmr
+  const lobbies = kCombinations(fixedIndexArray, 5)
+  const games = lobbies
+    .map((l) => {
+      const players = Array.from(new Set([...l, ...fixedIndexArray]))
+      const team1 = players.slice(0, 5)
+      const team1mmr = getTeamMMR(team1, input)
+      const team2 = players.slice(5, 10)
+      const team2mmr = getTeamMMR(team2, input)
+      return {
+        combo: players,
+        mmrDelta: Math.abs(team1mmr - team2mmr),
+        team1: {
+          players: team1,
+          mmr: team1mmr,
+        },
+        team2: {
+          players: team2,
+          mmr: team2mmr,
+        },
       }
-    }
-  }).sort((a,b) => a.mmrDelta - b.mmrDelta)
-  const equilibriumValue = quantile(games.map(x => x.mmrDelta), .5)
+    })
+    .sort((a, b) => a.mmrDelta - b.mmrDelta)
+  const equilibriumValue = quantile(
+    games.map((x) => x.mmrDelta),
+    0.5
+  )
   const topHalf = games.filter((x) => x.mmrDelta <= equilibriumValue)
-  const RoleScored = topHalf.map(x => {
+  const RoleScored = topHalf.map((x) => {
     const team1Order = getTeamOrder(x.team1.players, input)
     const team2Order = getTeamOrder(x.team2.players, input)
     return {
@@ -303,31 +336,36 @@ function matchmaking(input: Array<{ name: string, elo: string, roles: string[] }
       team1: {
         ...x.team1,
         players: team1Order.order,
-        roleScore: team1Order.roleScore
+        roleScore: team1Order.roleScore,
       },
       team2: {
         ...x.team2,
         players: team2Order.order,
-        roleScore: team2Order.roleScore
-      }
+        roleScore: team2Order.roleScore,
+      },
     }
   })
   console.log('RoleScored.length: ', RoleScored.length)
-  const output = RoleScored.map(x => prettyOutput(x, input))
-  return output.sort((a,b) => {
-    if(b.metadata.roleScore - a.metadata.roleScore === 0)
-      if(b.metadata.delta - a.metadata.delta === 0)
-        if(b.metadata.laneDelta - a.metadata.laneDelta === 0)
-          return Math.abs(a.red.roleScore-a.blue.roleScore) - Math.abs(b.red.roleScore-b.blue.roleScore)
-        else
-          return a.metadata.laneDelta- b.metadata.laneDelta
-      else
-        return a.metadata.delta - b.metadata.delta
-    return b.metadata.roleScore - a.metadata.roleScore
-  }).slice(0, 100)
+  const output = RoleScored.map((x) => prettyOutput(x, input))
+  return output
+    .sort((a, b) => {
+      if (b.metadata.roleScore - a.metadata.roleScore === 0)
+        if (b.metadata.delta - a.metadata.delta === 0)
+          if (b.metadata.laneDelta - a.metadata.laneDelta === 0)
+            return (
+              Math.abs(a.red.roleScore - a.blue.roleScore) -
+              Math.abs(b.red.roleScore - b.blue.roleScore)
+            )
+          else return a.metadata.laneDelta - b.metadata.laneDelta
+        else return a.metadata.delta - b.metadata.delta
+      return b.metadata.roleScore - a.metadata.roleScore
+    })
+    .slice(0, 100)
 }
 
-module.exports = function (input: Array<{ name: string, elo: string, roles: string[] }>): Array<object> {
+module.exports = function (
+  input: Array<{ name: string; elo: string; roles: string[] }>
+): Array<object> {
   inputSchema.validateSync(input)
   return matchmaking(input)
 }
