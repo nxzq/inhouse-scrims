@@ -1,0 +1,29 @@
+name: deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install and Build 🔧
+        run: cd module
+        run: npm ci
+        run: npm run build:prod
+        run: cd ..
+        run: cd app
+        run: npm ci
+        run: npm link ../module
+        run: npm run build
+        run: echo 'inhousescrims.com' > ./build/CNAME
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: build

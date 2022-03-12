@@ -1,0 +1,20 @@
+name: test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: cd module
+      - run: npm ci
+      - name: Test 🧪
+        run: npm run test
+      - name: Bundle 📦
+        run: npm run build:prod
