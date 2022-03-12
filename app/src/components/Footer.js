@@ -9,12 +9,12 @@ export default function Footer() {
         open source league of legends inhouse scrims matchmaking
       </p>
       <a
-        href="https://github.com/exclamationpointhuman/inhouse-scrims/tree/main/module"
+        href="https://github.com/exclamationpointhuman/inhouse-scrims/"
         className="text-slate-500 hover:underline"
       >
         <p className="text-slate-500 text-center mx-2 flex items-center justify-center">
           <img src={githubIcon} alt="github" className="w-4 h-4 mr-1" />
-          view algorithm here
+          code
         </p>
       </a>
     </div>
