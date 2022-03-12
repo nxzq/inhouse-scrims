@@ -69,13 +69,12 @@ function getOrdinalSuffix(i) {
 }
 
 const RoleScore = ({ rank }) => {
-  if (rank === 1) {
+  if (rank === 1)
     return <span className="text-emerald-500 uppercase">Great</span>
-  }
-  if (rank === 2) {
+  if (rank === 2 || rank === 3)
     return <span className="text-lime-500 uppercase">Good</span>
-  }
-  return <span className="text-yellow-500 uppercase">Fair</span>
+  if (rank < 7) return <span className="text-yellow-500 uppercase">Fair</span>
+  return <span className="text-red-500 uppercase">Poor</span>
 }
 
 const RoleRow = ({
@@ -230,7 +229,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
             rank: {
               teamDiff: teamDiffSet.indexOf(x.metadata.delta) + 1,
               laneDiff: laneDiffSet.indexOf(x.metadata.laneDelta) + 1,
-              role: roleScoreSet.indexOf(x.metadata.roleScore) + 1
+              role: roleScoreSet.indexOf(x.metadata.roleScore) + 1,
             },
           }
         })
@@ -258,8 +257,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
     else return document.execCommand('copy', true, text)
   }
 
-  if (processing)
-    return null
+  if (processing) return null
 
   return (
     <div>
