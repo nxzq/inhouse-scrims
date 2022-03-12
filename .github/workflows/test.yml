@@ -17,4 +17,7 @@ jobs:
           cd module
           npm ci
           npm run test
+      - name: Bundle 📦
+        run: |
+          cd module
           npm run build:prod
