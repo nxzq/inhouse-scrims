@@ -265,13 +265,7 @@ export default function Drafts({ players, toggleState, setErrors }) {
   }
 
   if (processing)
-    return (
-      <div className="text-slate-400 m-auto">
-        <p className="text-center px-6">
-          analyzing possible lobbies please wait ...
-        </p>
-      </div>
-    )
+    return null
 
   return (
     <div>
