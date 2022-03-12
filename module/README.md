@@ -9,7 +9,7 @@ League of Legends inhouse matchmaking solution. Attempts to honor role preferenc
 
 ## Usage
 
-inhouse-scrims exports a default function that takes in an array of player objects, validates the input then returns an array of top 25th percentile games sorted from most to least recommended.
+inhouse-scrims exports a default function that takes in an array of player objects, validates the input then returns an array of up to 100 scrim lobbies sorted.
 
 ## Inputs
 
@@ -86,10 +86,12 @@ Returns a sorted array of lobby objects
     {
       "red": {
         "mmr"
+        "roleScore"
         "roster"
       },
       "blue": {
         "mmr"
+        "roleScore"
         "roster"
       },
       "metadata": {
@@ -108,6 +110,7 @@ Team object includes a team MMR value as well as a roster object that has keys f
 ```json
     "team": {
         "mmr": 8800,
+        "roleScore": 8,
         "roster": {
           "top": {
             "name": "summoner 1",
