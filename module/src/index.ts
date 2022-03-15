@@ -50,8 +50,9 @@ const quantile = (arr: Array<any>, q: number): number => {
   }
 }
 
-function kCombinations(set: Array<any>, k: number): Array<any> {
-  var i, j, combs, head, tailcombs
+function getUniqueTeams(set: Array<any>, k: number): Array<any>{
+  let i, j, combs, head, tailcombs
+  const temp = [...set]
   if (k > set.length || k <= 0) {
     return []
   }
@@ -66,12 +67,13 @@ function kCombinations(set: Array<any>, k: number): Array<any> {
     return combs
   }
   combs = []
-  for (i = 0; i < set.length - k + 1; i++) {
-    head = set.slice(i, i + 1)
-    tailcombs = kCombinations(set.slice(i + 1), k - 1)
+  while (temp.length > k+1) {
+    head = temp.slice(0,1)
+    tailcombs = getUniqueTeams(temp.slice(1), k - 1)
     for (j = 0; j < tailcombs.length; j++) {
       combs.push(head.concat(tailcombs[j]))
     }
+    temp.shift()
   }
   return combs
 }
@@ -292,13 +294,8 @@ function matchmaking(
   input: Array<{ name: string; elo: string; roles: string[] }>
 ) {
   const fixedIndexArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  /*
-    currently creating duplicate combinations (252)
-    only need (10C5)/2 which is 126
-    causing a downstream cleanup step 
-    see (⚠️)
-  */
-  const lobbies = kCombinations(fixedIndexArray, 5)
+  const lobbies = getUniqueTeams(fixedIndexArray, 5)
+
   const games = lobbies
     .map((l) => {
       const players = Array.from(new Set([...l, ...fixedIndexArray]))
@@ -343,19 +340,7 @@ function matchmaking(
       },
     }
   })
-  // ⚠️
-  const noDupe = RoleScored.filter(
-    (value, index, self) =>
-      index ===
-      self.findIndex(
-        (t) =>
-          JSON.stringify(t.team1.players) ===
-            JSON.stringify(value.team2.players) ||
-          JSON.stringify(t.team1.players) ===
-            JSON.stringify(value.team1.players)
-      )
-  )
-  const output = noDupe.map((x) => prettyOutput(x, input))
+  const output = RoleScored.map((x) => prettyOutput(x, input))
   return output
     .sort((a, b) => {
       if (b.metadata.roleScore - a.metadata.roleScore === 0)
