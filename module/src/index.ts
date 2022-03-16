@@ -120,26 +120,25 @@ const getUniqueLobbies = (players: Players): Lobbies => {
   const fixedIndexArray = Array.from(Array(lobbySize).keys())
   const uniqueTeams = getUniqueTeams(fixedIndexArray, teamSize)
 
-  return uniqueTeams
-    .map((team) => {
-      const lobbies = Array.from(new Set([...team, ...fixedIndexArray]))
-      const team1 = lobbies.slice(0, teamSize)
-      const team1mmr = getTeamMMR(team1, players)
-      const team2 = lobbies.slice(teamSize, lobbySize)
-      const team2mmr = getTeamMMR(team2, players)
-      return {
-        combo: lobbies,
-        mmrDelta: Math.abs(team1mmr - team2mmr),
-        team1: {
-          players: team1,
-          mmr: team1mmr,
-        },
-        team2: {
-          players: team2,
-          mmr: team2mmr,
-        },
-      }
-    })
+  return uniqueTeams.map((team) => {
+    const lobbies = Array.from(new Set([...team, ...fixedIndexArray]))
+    const team1 = lobbies.slice(0, teamSize)
+    const team1mmr = getTeamMMR(team1, players)
+    const team2 = lobbies.slice(teamSize, lobbySize)
+    const team2mmr = getTeamMMR(team2, players)
+    return {
+      combo: lobbies,
+      mmrDelta: Math.abs(team1mmr - team2mmr),
+      team1: {
+        players: team1,
+        mmr: team1mmr,
+      },
+      team2: {
+        players: team2,
+        mmr: team2mmr,
+      },
+    }
+  })
 }
 
 const getRoleStatusArray = (team: Array<number>, players: Players) => {
