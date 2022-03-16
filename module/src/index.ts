@@ -50,34 +50,6 @@ const quantile = (arr: Array<any>, q: number): number => {
   }
 }
 
-function getUniqueTeams(set: Array<any>, k: number): Array<any>{
-  let i, j, combs, head, tailcombs
-  const temp = [...set]
-  if (k > set.length || k <= 0) {
-    return []
-  }
-  if (k == set.length) {
-    return [set]
-  }
-  if (k == 1) {
-    combs = []
-    for (i = 0; i < set.length; i++) {
-      combs.push([set[i]])
-    }
-    return combs
-  }
-  combs = []
-  while (temp.length > k+1) {
-    head = temp.slice(0,1)
-    tailcombs = getUniqueTeams(temp.slice(1), k - 1)
-    for (j = 0; j < tailcombs.length; j++) {
-      combs.push(head.concat(tailcombs[j]))
-    }
-    temp.shift()
-  }
-  return combs
-}
-
 const permutation = (array: Array<any>): Array<Array<any>> => {
   function p(array: Array<any>, temp: Array<any>) {
     var i, x
@@ -94,6 +66,28 @@ const permutation = (array: Array<any>): Array<Array<any>> => {
   var result: Array<any> = []
   p(array, [])
   return result
+}
+
+function getUniqueTeams(set: Array<any>, k: number): Array<any> {
+  let i, j, combs, head, tailcombs
+  const temp = [...set]
+  if (k == 1) {
+    combs = []
+    for (i = 0; i < set.length; i++) {
+      combs.push([set[i]])
+    }
+    return combs
+  }
+  combs = []
+  while (temp.length > k + 1) {
+    head = temp.slice(0, 1)
+    tailcombs = getUniqueTeams(temp.slice(1), k - 1)
+    for (j = 0; j < tailcombs.length; j++) {
+      combs.push(head.concat(tailcombs[j]))
+    }
+    temp.shift()
+  }
+  return combs
 }
 
 const getRoleStatusArray = (
