@@ -1,5 +1,23 @@
 const inputSchema = require('./utils/validate')
 
+interface Player {
+  name: string
+  elo: string
+  roles: string[]
+}
+
+interface Players extends Array<Player> {}
+
+interface Lobby {
+  combo: number[]
+  mmrDelta: number
+  roleScore?: number
+  team1: { players: number[]; mmr: number; roleScore?: number }
+  team2: { players: number[]; mmr: number; roleScore?: number }
+}
+
+interface Lobbies extends Array<Lobby> {}
+
 const MMR: { [key: string]: number } = Object.freeze({
   iron4: 200,
   iron3: 400,
@@ -68,6 +86,12 @@ const permutation = (array: Array<any>): Array<Array<any>> => {
   return result
 }
 
+const getTeamMMR = (team: Array<number>, players: Players): number => {
+  let x = 0
+  team.map((i) => (x += MMR[players[i].elo]))
+  return x
+}
+
 function getUniqueTeams(set: Array<any>, k: number): Array<any> {
   let i, j, combs, head, tailcombs
   const temp = [...set]
@@ -90,10 +114,36 @@ function getUniqueTeams(set: Array<any>, k: number): Array<any> {
   return combs
 }
 
-const getRoleStatusArray = (
-  team: Array<number>,
-  players: Array<{ name: string; elo: string; roles: string[] }>
-) => {
+const getUniqueLobbies = (players: Players): Lobbies => {
+  const lobbySize = players.length
+  const teamSize = lobbySize / 2
+  const fixedIndexArray = Array.from(Array(lobbySize).keys())
+  const uniqueTeams = getUniqueTeams(fixedIndexArray, teamSize)
+
+  return uniqueTeams
+    .map((team) => {
+      const lobbies = Array.from(new Set([...team, ...fixedIndexArray]))
+      const team1 = lobbies.slice(0, teamSize)
+      const team1mmr = getTeamMMR(team1, players)
+      const team2 = lobbies.slice(teamSize, lobbySize)
+      const team2mmr = getTeamMMR(team2, players)
+      return {
+        combo: lobbies,
+        mmrDelta: Math.abs(team1mmr - team2mmr),
+        team1: {
+          players: team1,
+          mmr: team1mmr,
+        },
+        team2: {
+          players: team2,
+          mmr: team2mmr,
+        },
+      }
+    })
+    .sort((a, b) => a.mmrDelta - b.mmrDelta)
+}
+
+const getRoleStatusArray = (team: Array<number>, players: Players) => {
   return team.map((player, i) => {
     let role = ROLES_BY_INDEX[i]
     let status = 'autofill'
@@ -122,10 +172,33 @@ const prettyRank = (elo: string) => {
   }
 }
 
+const roleScoreLobbies = (lobby: Lobby, noRoles: boolean, players: Players) => {
+  let team1Order = { order: lobby.team1.players, roleScore: 0 }
+  let team2Order = { order: lobby.team1.players, roleScore: 0 }
+  if (!noRoles) {
+    team1Order = getTeamOrder(lobby.team1.players, players)
+    team2Order = getTeamOrder(lobby.team2.players, players)
+  }
+  return {
+    ...lobby,
+    roleScore: team1Order.roleScore + team2Order.roleScore,
+    team1: {
+      ...lobby.team1,
+      players: team1Order.order,
+      roleScore: team1Order.roleScore,
+    },
+    team2: {
+      ...lobby.team2,
+      players: team2Order.order,
+      roleScore: team2Order.roleScore,
+    },
+  }
+}
+
 const getLaneDelta = (
   team1: Array<number>,
   team2: Array<number>,
-  players: Array<{ name: string; elo: string; roles: string[] }>
+  players: Players
 ): number => {
   let deltas = []
   for (let i = 0; i < 5; i++) {
@@ -136,103 +209,80 @@ const getLaneDelta = (
   return deltas.reduce((a, b) => a + b)
 }
 
-const prettyOutput = (
-  lobbyData: {
-    roleScore: number
-    team1: {
-      players: number[]
-      roleScore: number
-      mmr: number
-    }
-    team2: {
-      players: number[]
-      roleScore: number
-      mmr: number
-    }
-    combo: any[]
-    mmrDelta: number
-  },
-  players: Array<{ name: string; elo: string; roles: string[] }>
-) => {
-  const team1RoleBreakdown = getRoleStatusArray(
-    lobbyData.team1.players,
-    players
-  )
-  const team2RoleBreakdown = getRoleStatusArray(
-    lobbyData.team2.players,
-    players
-  )
+const prettyOutput = (lobby: Lobby, players: Players) => {
+  const team1RoleBreakdown = getRoleStatusArray(lobby.team1.players, players)
+  const team2RoleBreakdown = getRoleStatusArray(lobby.team2.players, players)
   const teamA = {
     roster: {
       top: {
-        ...players[lobbyData.team1.players[0]],
+        ...players[lobby.team1.players[0]],
         autofill: team1RoleBreakdown[0] === 'autofill',
-        mmr: MMR[players[lobbyData.team1.players[0]].elo],
-        elo: prettyRank(players[lobbyData.team1.players[0]].elo),
+        mmr: MMR[players[lobby.team1.players[0]].elo],
+        elo: prettyRank(players[lobby.team1.players[0]].elo),
       },
       jug: {
-        ...players[lobbyData.team1.players[1]],
+        ...players[lobby.team1.players[1]],
         autofill: team1RoleBreakdown[1] === 'autofill',
-        mmr: MMR[players[lobbyData.team1.players[1]].elo],
-        elo: prettyRank(players[lobbyData.team1.players[1]].elo),
+        mmr: MMR[players[lobby.team1.players[1]].elo],
+        elo: prettyRank(players[lobby.team1.players[1]].elo),
       },
       mid: {
-        ...players[lobbyData.team1.players[2]],
+        ...players[lobby.team1.players[2]],
         autofill: team1RoleBreakdown[2] === 'autofill',
-        mmr: MMR[players[lobbyData.team1.players[2]].elo],
-        elo: prettyRank(players[lobbyData.team1.players[2]].elo),
+        mmr: MMR[players[lobby.team1.players[2]].elo],
+        elo: prettyRank(players[lobby.team1.players[2]].elo),
       },
       bot: {
-        ...players[lobbyData.team1.players[3]],
+        ...players[lobby.team1.players[3]],
         autofill: team1RoleBreakdown[3] === 'autofill',
-        mmr: MMR[players[lobbyData.team1.players[3]].elo],
-        elo: prettyRank(players[lobbyData.team1.players[3]].elo),
+        mmr: MMR[players[lobby.team1.players[3]].elo],
+        elo: prettyRank(players[lobby.team1.players[3]].elo),
       },
       sup: {
-        ...players[lobbyData.team1.players[4]],
+        ...players[lobby.team1.players[4]],
         autofill: team1RoleBreakdown[4] === 'autofill',
-        mmr: MMR[players[lobbyData.team1.players[4]].elo],
-        elo: prettyRank(players[lobbyData.team1.players[4]].elo),
+        mmr: MMR[players[lobby.team1.players[4]].elo],
+        elo: prettyRank(players[lobby.team1.players[4]].elo),
       },
     },
-    mmr: lobbyData.team1.mmr,
-    roleScore: lobbyData.team2.roleScore,
+    mmr: lobby.team1.mmr,
+    roleScore: lobby.team2.roleScore,
   }
   const teamB = {
     roster: {
       top: {
-        ...players[lobbyData.team2.players[0]],
+        ...players[lobby.team2.players[0]],
         autofill: team2RoleBreakdown[0] === 'autofill',
-        mmr: MMR[players[lobbyData.team2.players[0]].elo],
-        elo: prettyRank(players[lobbyData.team2.players[0]].elo),
+        mmr: MMR[players[lobby.team2.players[0]].elo],
+        elo: prettyRank(players[lobby.team2.players[0]].elo),
       },
       jug: {
-        ...players[lobbyData.team2.players[1]],
+        ...players[lobby.team2.players[1]],
         autofill: team2RoleBreakdown[1] === 'autofill',
-        mmr: MMR[players[lobbyData.team2.players[1]].elo],
-        elo: prettyRank(players[lobbyData.team2.players[1]].elo),
+        mmr: MMR[players[lobby.team2.players[1]].elo],
+        elo: prettyRank(players[lobby.team2.players[1]].elo),
       },
       mid: {
-        ...players[lobbyData.team2.players[2]],
+        ...players[lobby.team2.players[2]],
         autofill: team2RoleBreakdown[2] === 'autofill',
-        mmr: MMR[players[lobbyData.team2.players[2]].elo],
-        elo: prettyRank(players[lobbyData.team2.players[2]].elo),
+        mmr: MMR[players[lobby.team2.players[2]].elo],
+        elo: prettyRank(players[lobby.team2.players[2]].elo),
       },
       bot: {
-        ...players[lobbyData.team2.players[3]],
+        ...players[lobby.team2.players[3]],
         autofill: team2RoleBreakdown[3] === 'autofill',
-        mmr: MMR[players[lobbyData.team2.players[3]].elo],
-        elo: prettyRank(players[lobbyData.team2.players[3]].elo),
+        mmr: MMR[players[lobby.team2.players[3]].elo],
+        elo: prettyRank(players[lobby.team2.players[3]].elo),
       },
       sup: {
-        ...players[lobbyData.team2.players[4]],
+        ...players[lobby.team2.players[4]],
         autofill: team2RoleBreakdown[4] === 'autofill',
-        mmr: MMR[players[lobbyData.team2.players[4]].elo],
-        elo: prettyRank(players[lobbyData.team2.players[4]].elo),
+        mmr: MMR[players[lobby.team2.players[4]].elo],
+        elo: prettyRank(players[lobby.team2.players[4]].elo),
       },
     },
-    mmr: lobbyData.team2.mmr,
-    roleScore: lobbyData.team2.roleScore,
+    mmr: lobby.team2.mmr,
+    roleScore: lobby.team2.roleScore,
   }
   const red = teamA.mmr > teamB.mmr ? teamA : teamB
   const blue = teamA.mmr > teamB.mmr ? teamB : teamA
@@ -240,11 +290,11 @@ const prettyOutput = (
     red,
     blue,
     metadata: {
-      roleScore: lobbyData.roleScore,
-      delta: lobbyData.mmrDelta,
+      roleScore: lobby.roleScore,
+      delta: lobby.mmrDelta,
       laneDelta: getLaneDelta(
-        lobbyData.team1.players,
-        lobbyData.team2.players,
+        lobby.team1.players,
+        lobby.team2.players,
         players
       ),
       skillLevel: teamA.mmr + teamB.mmr,
@@ -254,7 +304,7 @@ const prettyOutput = (
 
 const getTeamOrder = (
   team: Array<number>,
-  players: Array<{ name: string; elo: string; roles: string[] }>
+  players: Players
 ): { order: Array<number>; roleScore: number } => {
   const perm = permutation(team)
   const results = perm.map((x) => {
@@ -275,66 +325,18 @@ const getTeamOrder = (
   return sorted[0]
 }
 
-const getTeamMMR = (
-  team: Array<number>,
-  players: Array<{ name: string; elo: string; roles: string[] }>
-): number => {
-  let x = 0
-  team.map((i) => (x += MMR[players[i].elo]))
-  return x
-}
-
-function matchmaking(
-  input: Array<{ name: string; elo: string; roles: string[] }>
-) {
-  const fixedIndexArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const lobbies = getUniqueTeams(fixedIndexArray, 5)
-
-  const games = lobbies
-    .map((l) => {
-      const players = Array.from(new Set([...l, ...fixedIndexArray]))
-      const team1 = players.slice(0, 5)
-      const team1mmr = getTeamMMR(team1, input)
-      const team2 = players.slice(5, 10)
-      const team2mmr = getTeamMMR(team2, input)
-      return {
-        combo: players,
-        mmrDelta: Math.abs(team1mmr - team2mmr),
-        team1: {
-          players: team1,
-          mmr: team1mmr,
-        },
-        team2: {
-          players: team2,
-          mmr: team2mmr,
-        },
-      }
-    })
-    .sort((a, b) => a.mmrDelta - b.mmrDelta)
+function matchmaking(players: Players) {
+  const noRoles =
+    !!!players.map((x) => x.roles).flat().length || players.length < 10
+  const lobbies = getUniqueLobbies(players)
   const equilibriumValue = quantile(
-    games.map((x) => x.mmrDelta),
+    lobbies.map((x) => x.mmrDelta),
     0.5
   )
-  const topHalf = games.filter((x) => x.mmrDelta <= equilibriumValue)
-  const RoleScored = topHalf.map((x) => {
-    const team1Order = getTeamOrder(x.team1.players, input)
-    const team2Order = getTeamOrder(x.team2.players, input)
-    return {
-      ...x,
-      roleScore: team1Order.roleScore + team2Order.roleScore,
-      team1: {
-        ...x.team1,
-        players: team1Order.order,
-        roleScore: team1Order.roleScore,
-      },
-      team2: {
-        ...x.team2,
-        players: team2Order.order,
-        roleScore: team2Order.roleScore,
-      },
-    }
-  })
-  const output = RoleScored.map((x) => prettyOutput(x, input))
+  const balancedLobbies = lobbies.filter((x) => x.mmrDelta <= equilibriumValue)
+  const output = balancedLobbies
+    .map((x) => roleScoreLobbies(x, noRoles, players))
+    .map((x) => prettyOutput(x, players))
   return output
     .sort((a, b) => {
       if (b.metadata.roleScore - a.metadata.roleScore === 0)
@@ -351,9 +353,7 @@ function matchmaking(
     .slice(0, 100)
 }
 
-module.exports = function (
-  input: Array<{ name: string; elo: string; roles: string[] }>
-): Array<object> {
+module.exports = function (input: Players): Array<object> {
   inputSchema.validateSync(input)
   return matchmaking(input)
 }
