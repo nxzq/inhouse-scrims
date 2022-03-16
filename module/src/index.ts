@@ -140,7 +140,6 @@ const getUniqueLobbies = (players: Players): Lobbies => {
         },
       }
     })
-    .sort((a, b) => a.mmrDelta - b.mmrDelta)
 }
 
 const getRoleStatusArray = (team: Array<number>, players: Players) => {
