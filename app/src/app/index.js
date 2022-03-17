@@ -116,7 +116,7 @@ export default function App() {
                 <span className="text-rose-700 font-semibold uppercase">
                   Errors
                 </span>
-                <pre>{errors}</pre>
+                <pre className="text-slate-300">{errors}</pre>
               </div>
             )}
             <p className="text-slate-400 uppercase m-2 text-center">
