@@ -1,7 +1,7 @@
 # inhouse-scrims
 
 <p>
-  <a href="https://inhousescrims.com" alt="GitHub Pages">
+  <a href="https://niknakz.github.io/inhouse-scrims" alt="GitHub Pages">
     <img src="https://img.shields.io/badge/pages%20-deployed-%23222222?logo=github&style=flat-square" />
   </a>
 </p>
