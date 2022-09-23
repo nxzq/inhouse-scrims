@@ -1,4 +1,4 @@
-import inputSchema from './utils/validate'
+const inputSchema = require('./utils/validate')
 
 interface Player {
   name: string
@@ -351,7 +351,7 @@ function matchmaking(players: Players) {
     .slice(0, 100)
 }
 
-export default function (input: Players): Array<object> {
+module.exports = function (input: Players): Array<object> {
   inputSchema.validateSync(input)
   return matchmaking(input)
 }

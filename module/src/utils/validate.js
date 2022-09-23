@@ -1,9 +1,9 @@
-import * as yup from 'yup'
+const yup = require('yup')
 
 /**
  * yup validation schema for input
  */
-export default yup
+module.exports = yup
   .array()
   .length(10)
   .required()
