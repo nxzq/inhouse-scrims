@@ -1,5 +1,5 @@
-import SelectRank from '../components/SelectRank'
-import SelectRole from '../components/SelectRole'
+import SelectRank from './SelectRank'
+import SelectRole from './SelectRole'
 
 export default function SummonerInput({ summoner, i, handleChange }) {
   return (

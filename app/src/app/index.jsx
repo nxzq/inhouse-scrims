@@ -7,56 +7,16 @@ import Footer from '../components/Footer'
 import layout from './layout.module.css'
 
 const defaultPlayers = [
-  {
-    name: 'LettuceDog',
-    elo: 'diamond',
-    roles: [],
-  },
-  {
-    name: 'CrissCross',
-    elo: 'platinum',
-    roles: ['bot', 'top'],
-  },
-  {
-    name: 'Game0ver',
-    elo: 'silver',
-    roles: ['jug', 'sup'],
-  },
-  {
-    name: 'dude go long',
-    elo: 'platinum',
-    roles: ['jug', 'mid'],
-  },
-  {
-    name: 'barracuda',
-    elo: 'gold',
-    roles: ['bot', 'jug'],
-  },
-  {
-    name: 'Hypr',
-    elo: 'master',
-    roles: ['mid'],
-  },
-  {
-    name: 'you sweat in casual',
-    elo: 'platinum',
-    roles: ['top', 'jug'],
-  },
-  {
-    name: 'I AM REX RYAN',
-    elo: 'silver',
-    roles: ['top', 'sup'],
-  },
-  {
-    name: 'Bob Ross Ate My Son',
-    elo: 'gold',
-    roles: ['sup'],
-  },
-  {
-    name: 'AOL Account',
-    elo: 'gold',
-    roles: [],
-  },
+  { name: 'Buelow', elo: 'diamond', roles: [] },
+  { name: 'Cbuelow', elo: 'platinum', roles: ['bot', 'top'] },
+  { name: 'LuckyC14', elo: 'silver', roles: ['jug', 'sup'] },
+  { name: 'II walter II', elo: 'platinum', roles: ['jug', 'mid'] },
+  { name: 'cal420swag', elo: 'gold', roles: ['bot', 'jug'] },
+  { name: 'Anti Flaws', elo: 'silver', roles: ['top', 'bot'] },
+  { name: 'TurkeyAI', elo: 'platinum', roles: ['top', 'jug'] },
+  { name: 'HIPP0B0SS', elo: 'silver', roles: ['top', 'sup'] },
+  { name: 'redsledge', elo: 'gold', roles: ['sup'] },
+  { name: 'SCANTRON', elo: 'gold', roles: [] },
 ]
 
 const getPlayers = () => {
