@@ -4,7 +4,7 @@ module.exports = {
   entry: path.join(__dirname, './src/index.ts'),
   output: {
     path: path.join(__dirname, './dist'),
-    filename: 'index.js',
+    filename: 'index.cjs',
     libraryTarget: 'commonjs2',
     publicPath: '/dist/',
   },

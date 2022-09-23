@@ -6,12 +6,15 @@ import svgrPlugin from 'vite-plugin-svgr';
 export default defineConfig({
   build: {
     outDir: 'build',
-  },
-  optimizeDeps: {
-    include: ['inhouse-scrims']
+    commonjsOptions: {
+      include: [/inhouse-scrims/, /node_modules/]
+    }
   },
   plugins: [react(), svgrPlugin()],
   server: {
     open: true,
+  },
+  optimizeDeps: {
+    include: ['inhouse-scrims']
   }
 });

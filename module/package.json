@@ -1,7 +1,8 @@
 {
   "name": "inhouse-scrims",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "type": "module",
   "scripts": {
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production",
