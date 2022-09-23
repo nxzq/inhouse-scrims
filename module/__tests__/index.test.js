@@ -1,4 +1,4 @@
-import func from '../src'
+const func = require('../src')
 
 const defaultPlayers = [
   { name: 'LettuceDog', elo: 'diamond', roles: [] },
