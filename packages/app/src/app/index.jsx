@@ -34,6 +34,13 @@ const getPlayers = () => {
   }
 }
 
+const inputHasErrors = (errors, index) => {
+  if (!errors) return false
+  const regex = `[${index}].`
+  const pattern = new RegExp(regex, 'g')
+  return pattern.test(errors)
+}
+
 export default function App() {
   const [errors, setErrors] = useState(null)
   const [appState, setAppState] = useState('input')
@@ -88,6 +95,7 @@ export default function App() {
                   <Input
                     summoner={player}
                     i={i}
+                    error={inputHasErrors(errors, i)}
                     handleChange={handleChange}
                     key={i}
                   />

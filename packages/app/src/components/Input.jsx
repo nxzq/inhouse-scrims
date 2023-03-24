@@ -1,9 +1,13 @@
 import SelectRank from './SelectRank'
 import SelectRole from './SelectRole'
 
-export default function SummonerInput({ summoner, i, handleChange }) {
+export default function SummonerInput({ summoner, i, handleChange, error }) {
   return (
-    <div className="relative max-w-6xl m-2 py-1 px-2 bg-slate-700 rounded-sm">
+    <div
+      className={`relative max-w-6xl m-2 py-1 px-2 bg-slate-700 rounded-sm ${
+        error && 'border-2 border-rose-700'
+      }`}
+    >
       <div className="md:flex">
         <div className="m-2 p-2 md:w-64">
           <div>
