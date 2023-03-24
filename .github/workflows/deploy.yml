@@ -20,7 +20,7 @@ jobs:
           npm run build
           cd ..
           cd app
-          npm ci --ignore-scripts --no-audit --no-fund --no-progress --omit=optional --prefer-offline
+          npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
           npm link ../module
           npm run build
       - name: Deploy 🚀
