@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "types"
+    "declarationDir": "types",
+    "strict": true
   }
 }

@@ -23,7 +23,7 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
-    "yup": "^0.32.11"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@vitest/coverage-c8": "^0.29.7",

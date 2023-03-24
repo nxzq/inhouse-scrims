@@ -297,6 +297,6 @@ function matchmaking(players: Players) {
 }
 
 export default function (input: Players): Array<object> {
-  inputSchema.validateSync(input)
+  inputSchema.parse(input)
   return matchmaking(input)
 }
