@@ -17,7 +17,7 @@ jobs:
           cd packages
           cd module
           npm ci --ignore-scripts --no-audit --no-fund --no-progress --omit=optional --prefer-offline
-          npm run test
+          npm run test:coverage
       - name: Bundle 📦
         run: |
           cd packages

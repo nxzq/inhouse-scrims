@@ -1,4 +1,4 @@
-import matchmaking from 'inhouse-scrims'
+import matchmaking from 'inhouse-scrims-algorithm'
 import { useState, useEffect } from 'react'
 
 import 'react-tippy/dist/tippy.css'
