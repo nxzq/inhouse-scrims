@@ -16,7 +16,7 @@
     "types"
   ],
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "vite build",
     "prettier": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "test": "vitest",

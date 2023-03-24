@@ -1,9 +1,5 @@
-import * as yup from 'yup'
 import { z } from 'zod'
 
-/**
- * yup validation schema for input
- */
 export const inputSchema = z
   .object({
     name: z.string(),
