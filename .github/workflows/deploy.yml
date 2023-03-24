@@ -16,11 +16,11 @@ jobs:
         run: |
           cd packages
           cd module
-          npm ci
+          npm ci --ignore-scripts --no-audit --no-fund --no-progress --omit=optional --prefer-offline
           npm run build
           cd ..
           cd app
-          npm ci
+          npm ci --ignore-scripts --no-audit --no-fund --no-progress --omit=optional --prefer-offline
           npm link ../module
           npm run build
       - name: Deploy 🚀
