@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -14,9 +14,10 @@ jobs:
           node-version: 16
       - name: Install and Build 🔧
         run: |
+          cd packages
           cd module
           npm ci
-          npm run build:prod
+          npm run build
           cd ..
           cd app
           npm ci
@@ -26,4 +27,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
-          folder: app/build
+          folder: packages/app/build

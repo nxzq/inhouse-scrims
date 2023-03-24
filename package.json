@@ -1,0 +1,45 @@
+{
+  "name": "inhouse-scrims",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prettier": "lerna run prettier --parallel",
+    "prettier:fix": "lerna run prettier:fix --parallel",
+    "prepare": "[ \"$CI\" == \"true\" ] || husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.0",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3",
+    "lerna": "^6.6.0",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.7"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{cjs,cts,js,jsx,mjs,mts,ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.html": [
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.css": [
+      "prettier --write"
+    ],
+    "*.{md,mdx}": [
+      "prettier --write"
+    ],
+    "*.{yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

@@ -2,7 +2,7 @@ name: test
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -14,10 +14,12 @@ jobs:
           node-version: 16
       - name: Test 🧪
         run: |
+          cd packages
           cd module
           npm ci
           npm run test
       - name: Bundle 📦
         run: |
+          cd packages
           cd module
-          npm run build:prod
+          npm run build
