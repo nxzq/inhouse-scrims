@@ -5,15 +5,14 @@
     "modules/*"
   ],
   "scripts": {
-    "prettier": "lerna run prettier --parallel",
-    "prettier:fix": "lerna run prettier:fix --parallel",
+    "prettier": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write .",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.0",
     "@commitlint/config-conventional": "^17.4.4",
     "husky": "^8.0.3",
-    "lerna": "^6.6.0",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7"
   },

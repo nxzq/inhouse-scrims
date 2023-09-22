@@ -17,8 +17,6 @@
   ],
   "scripts": {
     "build": "vite build",
-    "prettier": "npx prettier --check .",
-    "prettier:fix": "npx prettier --write .",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
   },

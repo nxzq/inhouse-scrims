@@ -15,9 +15,7 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d build",
-    "prettier": "npx prettier --check .",
-    "prettier:fix": "npx prettier --write ."
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
