@@ -4,7 +4,7 @@ League of Legends inhouse matchmaking solution. Attempts to honor role preferenc
 
 ## Usage
 
-`/module` exports a default function that takes in an array of player objects, validates the input then returns an array of up to 100 scrim lobbies sorted.
+`/generator` exports a default function that takes in an array of player objects, validates the input then returns an array of up to 100 scrim lobbies sorted.
 
 ## Inputs
 
