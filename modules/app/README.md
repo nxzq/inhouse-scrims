@@ -14,6 +14,6 @@ To get started locally:
 
 ```bash
     npm ci
-    npm link ../module
+    npm link ../generator
     npm start
 ```
