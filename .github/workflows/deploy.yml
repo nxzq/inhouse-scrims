@@ -14,9 +14,9 @@ jobs:
           node-version: 16
       - name: Install and Build 🔧
         run: |
+          npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
           cd modules
           cd generator
-          npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
           npm run build
           cd ..
           cd app
