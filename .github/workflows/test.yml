@@ -14,12 +14,12 @@ jobs:
           node-version: 16
       - name: Test 🧪
         run: |
-          cd packages
+          cd modules
           cd module
           npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
           npm run test:coverage
       - name: Bundle 📦
         run: |
-          cd packages
+          cd modules
           cd module
           npm run build

@@ -2,7 +2,7 @@
   "name": "inhouse-scrims",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "modules/*"
   ],
   "scripts": {
     "prettier": "lerna run prettier --parallel",

@@ -7,12 +7,11 @@ import Footer from '../components/Footer'
 
 import layout from './layout.module.css'
 
-const helpText = `Matchmaking for your 10 stack! 🤝
+const helpText = `<strong>Matchmaking for your 10 stack! 🤝</strong>
 <br />
-Approximate skill levels & choose role preferences then click <i><b>Generate Inhouse Lobbies</b>.
+Select skill levels & role preferences then click <i><pre>Generate Inhouse Lobbies</pre></i>
 <br />
-<br />
-Algorithm attempts to honor role preference while also minimizing Team & Lane Diff.</i>
+<i>Algorithm attempts to honor role preference while minimizing Team & Lane Differential</i>
 `
 
 const defaultPlayers = [
@@ -96,6 +95,8 @@ export default function App() {
                 className="cursor-pointer"
               >
                 <svg
+                  tabindex="0"
+                  arialabeledby="more info"
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 text-stone-300"
                   fill="none"
