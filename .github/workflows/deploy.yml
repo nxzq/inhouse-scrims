@@ -15,6 +15,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
+          npm install esbuild # temp fix (https://github.com/evanw/esbuild/issues/1819#issuecomment-1680244804)
           cd modules
           cd generator
           npm run build
