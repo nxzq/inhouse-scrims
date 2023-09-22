@@ -15,13 +15,13 @@ jobs:
       - name: Install and Build 🔧
         run: |
           cd modules
-          cd module
+          cd generator
           npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
           npm run build
           cd ..
           cd app
           npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
-          npm link ../module
+          npm link ../generator
           npm run build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5

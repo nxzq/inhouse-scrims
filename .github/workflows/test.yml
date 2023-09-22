@@ -15,11 +15,11 @@ jobs:
       - name: Test 🧪
         run: |
           cd modules
-          cd module
+          cd generator
           npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
           npm run test:coverage
       - name: Bundle 📦
         run: |
           cd modules
-          cd module
+          cd generator
           npm run build
