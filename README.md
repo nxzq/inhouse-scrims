@@ -2,7 +2,7 @@
 
 <p>
   <a href="https://nxzq.github.io/inhouse-scrims" alt="GitHub Pages">
-    <img src="https://img.shields.io/badge/pages%20-deployed-%23222222?logo=github&style=flat-square" />
+    <img src="https://img.shields.io/badge/pages%20-nxzq.github.io/inhouse--scrims-%23222222?logo=github&style=flat-square" />
   </a>
 </p>
 <p>
