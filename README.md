@@ -8,4 +8,4 @@
 
 ![demo](https://raw.githubusercontent.com/nxzq/misc/main/inhouse-scrims/demo.gif)
 
-League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Learn more about the [algorithm here](/modules/module/README.md).
+League of Legends inhouse matchmaking solution. Attempts to honor role preference while also minimizing team MMR Δ & lane MMR Δ (Lane Diff). Learn more about the [algorithm here](/modules/generator/README.md).
