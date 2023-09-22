@@ -9,7 +9,7 @@
   <a href='https://reactjs.org/' target="_blank" rel="noopener noreferrer">
     <img src='https://img.shields.io/badge/React-%23545455?logo=react&style=flat-square' alt='react'/>
   </a>
-  <a href='https://tailwindcss.com//' target="_blank" rel="noopener noreferrer">
+  <a href='https://tailwindcss.com/' target="_blank" rel="noopener noreferrer">
     <img src='https://img.shields.io/badge/Tailwind-%23545455?logo=tailwindcss&style=flat-square' alt='tailwindcss'/>
   </a>
   <a href='https://www.javascript.com/' target="_blank" rel="noopener noreferrer">
