@@ -105,10 +105,10 @@ const prettyRank = (elo: string) => {
     3: 'iii',
     4: 'iv',
   }
-  const division = elo.match(/\d+$/)
+  const division = typeof elo.slice(-1) === 'number'
   if (division) {
     return `${elo.charAt(0).toUpperCase() + elo.slice(1, -1)} ${ranks[
-      Number(division[0])
+      Number(elo.slice(-1))
     ].toUpperCase()}`
   } else {
     return elo.charAt(0).toUpperCase() + elo.slice(1)
