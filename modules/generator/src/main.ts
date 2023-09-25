@@ -1,5 +1,5 @@
 import { inputSchema } from './utils/validate'
-import { Player, Players, Lobby, Lobbies } from './types'
+import { Players, Lobby, Lobbies } from './types'
 import { MMR, ROLES_BY_INDEX } from './utils/enums'
 
 const quantile = (arr: Array<any>, q: number): number => {
@@ -106,7 +106,7 @@ const prettyRank = (elo: string) => {
     3: 'iii',
     4: 'iv',
   }
-  const division = typeof elo.slice(-1) === 'number'
+  const division = !isNaN(Number(elo.slice(-1)))
   if (division) {
     return `${elo.charAt(0).toUpperCase() + elo.slice(1, -1)} ${ranks[
       Number(elo.slice(-1))
