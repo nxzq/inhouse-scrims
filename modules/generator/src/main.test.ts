@@ -17,14 +17,14 @@ const defaultPlayers = [
 
 describe('test suite', () => {
   it('[5v5 rift] default players', () => {
-    const result = func(defaultPlayers)
+    func(defaultPlayers)
   })
 
   it('[5v5 rift] divisions', () => {
     const players = [...defaultPlayers]
     players[0].elo = 'diamond4'
     players[1].elo = 'platinum2'
-    const result = func(players)
+    func(players)
   })
 
   it('[5v5 rift] full fill', () => {
@@ -33,7 +33,7 @@ describe('test suite', () => {
       roles: [],
       elo: 'gold',
     }))
-    const result = func(players)
+    func(players)
   })
 
   it('[5v5 rift] full duplicate', () => {
@@ -42,7 +42,7 @@ describe('test suite', () => {
       roles: ['mid', 'jug'],
       elo: 'gold',
     }))
-    const result = func(players)
+    func(players)
   })
 
   it('[5v5 rift] pro', () => {
@@ -98,14 +98,14 @@ describe('test suite', () => {
         roles: ['top'],
       },
     ]
-    const result = func(players)
+    func(players)
   })
 
   it('throws error when missing data', () => {
     const players = [...defaultPlayers]
     players[0].name = ''
     try {
-      const result = func(players)
+      func(players)
       expect.fail()
     } catch (err) {
       if (err instanceof z.ZodError) {

@@ -1,36 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { inputSchema } from './utils/validate'
 import { Players, Lobby, Lobbies } from './types'
 import { MMR, ROLES_BY_INDEX } from './utils/enums'
-
-const quantile = (arr: Array<any>, q: number): number => {
-  const sorted = arr.sort((a, b) => a - b)
-  const pos = (sorted.length - 1) * q
-  const base = Math.floor(pos)
-  const rest = pos - base
-  if (sorted[base + 1] !== undefined) {
-    return sorted[base] + rest * (sorted[base + 1] - sorted[base])
-  } else {
-    return sorted[base]
-  }
-}
-
-const permutation = (array: Array<any>): Array<Array<any>> => {
-  function p(array: Array<any>, temp: Array<any>) {
-    var i, x
-    if (!array.length) {
-      result.push(temp)
-    }
-    for (i = 0; i < array.length; i++) {
-      x = array.splice(i, 1)[0]
-      p(array, temp.concat(x))
-      array.splice(i, 0, x)
-    }
-  }
-
-  var result: Array<any> = []
-  p(array, [])
-  return result
-}
+import { quantile, permutation } from './utils/compute'
 
 const getTeamMMR = (team: Array<number>, players: Players): number => {
   let x = 0
@@ -89,7 +61,7 @@ const getUniqueLobbies = (players: Players): Lobbies => {
 
 const getRoleStatusArray = (team: Array<number>, players: Players) => {
   return team.map((player, i) => {
-    let role = ROLES_BY_INDEX[i]
+    const role = ROLES_BY_INDEX[i]
     let status = 'autofill'
     if (players[player].roles.length === 0) status = 'fill'
     if (players[player].roles[0] === role) status = 'primary'
@@ -144,7 +116,7 @@ const getLaneDelta = (
   team2: Array<number>,
   players: Players
 ): number => {
-  let deltas = []
+  const deltas = []
   for (let i = 0; i < 5; i++) {
     deltas.push(
       Math.abs(MMR[players[team1[i]].elo] - MMR[players[team2[i]].elo])
@@ -271,7 +243,7 @@ const getTeamOrder = (
 
 function matchmaking(players: Players) {
   const noRoles =
-    !!!players.map((x) => x.roles).flat().length || players.length < 10
+    !players.map((x) => x.roles).flat().length || players.length < 10
   const lobbies = getUniqueLobbies(players)
   const equilibriumValue = quantile(
     lobbies.map((x) => x.mmrDelta),

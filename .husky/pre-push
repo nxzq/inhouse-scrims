@@ -4,3 +4,4 @@
 cd modules/generator
 npm run test:coverage
 cd ../..
+npm run lint -- --max-warnings=0
