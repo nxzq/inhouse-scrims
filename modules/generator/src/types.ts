@@ -1,12 +1,12 @@
-interface Player {
+export type Player = {
   name: string
   elo: string
   roles: string[]
 }
 
-interface Players extends Array<Player> {}
+export type Players = Player[]
 
-interface Lobby {
+export type Lobby = {
   combo: number[]
   mmrDelta: number
   roleScore?: number
@@ -14,4 +14,4 @@ interface Lobby {
   team2: { players: number[]; mmr: number; roleScore?: number }
 }
 
-interface Lobbies extends Array<Lobby> {}
+export type Lobbies = Lobby[]

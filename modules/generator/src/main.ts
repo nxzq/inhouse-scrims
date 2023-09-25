@@ -1,4 +1,5 @@
 import { inputSchema } from './utils/validate'
+import { Player, Players, Lobby, Lobbies } from './types'
 import { MMR, ROLES_BY_INDEX } from './utils/enums'
 
 const quantile = (arr: Array<any>, q: number): number => {
@@ -254,9 +255,9 @@ const getTeamOrder = (
     const rolesBreakdown = getRoleStatusArray(x, players)
     const roleScore = rolesBreakdown
       .map((x) => {
-        if (x === 'primary') return 2
-        if (x === 'secondary') return 1
-        else return 0
+        if (x === 'primary') return Number(2)
+        if (x === 'secondary') return Number(1)
+        else return Number(0)
       })
       .reduce((a, b) => a + b, 0)
     return {
@@ -282,16 +283,16 @@ function matchmaking(players: Players) {
     .map((x) => prettyOutput(x, players))
   return output
     .sort((a, b) => {
-      if (b.metadata.roleScore - a.metadata.roleScore === 0)
+      if (Number(b.metadata.roleScore) - Number(a.metadata.roleScore) === 0)
         if (b.metadata.delta - a.metadata.delta === 0)
           if (b.metadata.laneDelta - a.metadata.laneDelta === 0)
             return (
-              Math.abs(a.red.roleScore - a.blue.roleScore) -
-              Math.abs(b.red.roleScore - b.blue.roleScore)
+              Math.abs(Number(a.red.roleScore) - Number(a.blue.roleScore)) -
+              Math.abs(Number(b.red.roleScore) - Number(b.blue.roleScore))
             )
           else return a.metadata.laneDelta - b.metadata.laneDelta
         else return a.metadata.delta - b.metadata.delta
-      return b.metadata.roleScore - a.metadata.roleScore
+      return Number(b.metadata.roleScore) - Number(a.metadata.roleScore)
     })
     .slice(0, 100)
 }
