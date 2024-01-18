@@ -1,0 +1,26 @@
+name: test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Test 🧪
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline
+          npm install esbuild # temp fix (https://github.com/evanw/esbuild/issues/1819#issuecomment-1680244804)
+          cd modules
+          cd generator
+          npm run test:coverage
+      - name: Bundle 📦
+        run: |
+          cd modules
+          cd generator
+          npm run build

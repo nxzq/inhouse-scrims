@@ -1,0 +1,49 @@
+{
+  "name": "inhouse-scrims",
+  "private": true,
+  "workspaces": [
+    "modules/*"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "prettier": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write .",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.0",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.7"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{cjs,cts,js,jsx,mjs,mts,ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.html": [
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.css": [
+      "prettier --write"
+    ],
+    "*.{md,mdx}": [
+      "prettier --write"
+    ],
+    "*.{yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}
