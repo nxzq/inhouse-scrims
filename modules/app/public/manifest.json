@@ -1,0 +1,25 @@
+{
+  "short_name": "inhouse scrim generator",
+  "name": "Open-Source League of Legends inhouse scrims matchmaking. Algorithm accounts for elo and role preference.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "bot.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "bot.svg",
+      "type": "image/svg",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1e293b",
+  "background_color": "#1e293b"
+}
